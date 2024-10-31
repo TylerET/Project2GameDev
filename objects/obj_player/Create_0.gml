@@ -55,6 +55,8 @@ toleranceUniform = shader_get_uniform(shader_color_select_grayscale, "tolerance"
 
 shaderActive1 = false;
 shaderActive2 = true;
+shaderActive3 = false;
 tolerance = 0;
+
 
 

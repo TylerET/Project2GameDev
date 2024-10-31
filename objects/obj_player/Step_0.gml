@@ -131,8 +131,16 @@ if (keyboard_check_pressed(vk_f3)) {
     tolerance += .1;
 }
 
+if (keyboard_check_pressed(vk_f4)) {
+    shaderActive3 = !shaderActive3;
+	shaderActive1 = false;
+	shaderActive2 = false;
+}
+
 if (keyboard_check_pressed(ord("R"))) {
 	game_restart()
 }
+
+
 
 

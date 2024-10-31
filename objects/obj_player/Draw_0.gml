@@ -8,6 +8,6 @@ if (shaderActive1) {
 	shader_set(shader_grayscale)
 	draw_sprite_ext(sprite_index, image_index, x , y, image_xscale*faceDir, image_yscale, image_angle, image_blend, image_alpha);
     shader_reset();
-}else {
+} else {
     draw_sprite_ext(sprite_index, image_index, x , y, image_xscale*faceDir, image_yscale, image_angle, image_blend, image_alpha);
 }
