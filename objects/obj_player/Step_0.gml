@@ -1,6 +1,7 @@
 // Setup
 getControls();
 
+onWall = false;
 
 #region X Movement
 
@@ -18,6 +19,7 @@ if place_meeting(x + xSpeed, y ,  obj_wall_collisions) {
 		x += _pixelCheck;
 	}
 	xSpeed = 0;
+	onWall = true;
 }
 
 //Move
@@ -31,7 +33,9 @@ x += xSpeed;
 if coyoteHangTimer > 0 {
 	coyoteHangTimer--;
 }else {
-	ySpeed += grav;
+	if (onWall && ySpeed > 0) {
+		ySpeed += grav / 50;
+	} else { ySpeed += grav}
 	setOnGround(false);
 }
 
@@ -100,25 +104,35 @@ y += ySpeed;
 #region Sprite controls
 if abs(xSpeed) > 0 { sprite_index = runType ? runSpr : walkSpr}
 if xSpeed == 0 {sprite_index = idleSpr}
-if !onGround {sprite_index = jumpSpr}
+if !onGround {
+	if (onWall){
+		sprite_index = wallSlideSpr
+	} else {
+		sprite_index = jumpSpr
+	}	
+}
 mask_index = idleSpr
 
 
 #endregion
 
 if (keyboard_check_pressed(vk_f1)) {
-    shaderActive1 = !shaderActive1;// Toggle the shader on/off
+    shaderActive1 = !shaderActive1;
 	shaderActive2  = false;
 }
 
 if (keyboard_check_pressed(vk_f2)) {
-    shaderActive2 = !shaderActive2;// Toggle the shader on/off
+    shaderActive2 = !shaderActive2;
 	shaderActive1 = false;
 }
 
 if (keyboard_check_pressed(vk_f3)) {
 	show_debug_message(tolerance)
     tolerance += .1;
+}
+
+if (keyboard_check_pressed(ord("R"))) {
+	game_restart()
 }
 
 

@@ -1,9 +1,10 @@
 #region Sprites
-idleSpr = spr_player_idle;
+idleSpr = spr_player_idle_knife;
 walkSpr = spr_player_walk;
-runSpr = spr_player_run
+runSpr = spr_player_run_knife
 jumpSpr = spr_player_jump;
 jumpFlipSpr = spr_player_jump_flip;
+wallSlideSpr = spr_player_wall_slide
 
 #endregion
 
@@ -33,6 +34,8 @@ coyoteHangFrames = 2;
 coyoteHangTimer = 0;
 coyoteJumpFrames = 5;
 coyoteJumpTimer = 0;
+// Wall slide
+onWall = false;
 
 function setOnGround(_val = true){
 	if _val {
@@ -47,8 +50,8 @@ function setOnGround(_val = true){
 
 #endregion
 
-targetColorUniform = shader_get_uniform(Shader2, "targetColor");
-toleranceUniform = shader_get_uniform(Shader2, "tolerance");
+targetColorUniform = shader_get_uniform(shader_color_select_grayscale, "targetColor");
+toleranceUniform = shader_get_uniform(shader_color_select_grayscale, "tolerance");
 
 shaderActive1 = false;
 shaderActive2 = true;

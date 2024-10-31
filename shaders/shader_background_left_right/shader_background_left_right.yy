@@ -1,0 +1,12 @@
+{
+  "$GMShader":"",
+  "%Name":"shader_background_left_right",
+  "name":"shader_background_left_right",
+  "parent":{
+    "name":"Shaders",
+    "path":"folders/Shaders.yy",
+  },
+  "resourceType":"GMShader",
+  "resourceVersion":"2.0",
+  "type":1,
+}
