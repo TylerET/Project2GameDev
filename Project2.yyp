@@ -47,6 +47,7 @@
     {"id":{"name":"shader_background_slow_fade","path":"shaders/shader_background_slow_fade/shader_background_slow_fade.yy",},},
     {"id":{"name":"shader_color_select_grayscale","path":"shaders/shader_color_select_grayscale/shader_color_select_grayscale.yy",},},
     {"id":{"name":"shader_grayscale","path":"shaders/shader_grayscale/shader_grayscale.yy",},},
+    {"id":{"name":"Shader5","path":"shaders/Shader5/Shader5.yy",},},
     {"id":{"name":"spr_concept_background_bright","path":"sprites/spr_concept_background_bright/spr_concept_background_bright.yy",},},
     {"id":{"name":"spr_concept_background","path":"sprites/spr_concept_background/spr_concept_background.yy",},},
     {"id":{"name":"spr_placeholder_background","path":"sprites/spr_placeholder_background/spr_placeholder_background.yy",},},

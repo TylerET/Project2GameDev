@@ -4,7 +4,7 @@ uniform float cutoff; // A value between 0.0 and 1.0 representing the reveal pro
 
 // Simple pseudo-random function based on Y-coordinate
 float randomOffset(float y) {
-    return fract(sin(y * 12.9898) * 43758.5453) * 0.1; // Adjust multiplier for effect strength
+    return fract(sin(y * 12.9898) * 43758.5453) * 0.1; 
 }
 
 void main() {
