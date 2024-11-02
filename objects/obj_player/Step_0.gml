@@ -1,3 +1,44 @@
+if (global.paused) {
+	image_speed = 0;
+    exit; // Skip the rest of the Step Event if the game is paused
+} else {
+	image_speed = 1 
+}
+
+// Step Event of obj_player
+if (place_meeting(x, y, obj_camera_transition)) {
+    global.fullRoomCamera = true;
+	instance_create_layer(x, y, "Background_Instance", obj_background_controller)
+} else {
+    global.fullRoomCamera = false;
+}
+
+
+
+// Define push direction and speed
+var push_speed = 4;
+var target_block = instance_place(x + 1, y, obj_moveable); // Detect nearby obj_block
+
+// Only push if a specific instance of obj_block is near
+if (target_block != noone) {
+    // Calculate the target position for pushing horizontally
+    var target_x = target_block.x + push_speed;
+
+    // Check if the target instance of obj_block can move without collision
+    if (!place_meeting(target_x, target_block.y, obj_wall_collisions)) {
+        target_block.x = target_x; // Move the specific obj_block
+    } else {
+        // Handle collision by moving up to the collision boundary
+        while (!place_meeting(target_block.x + sign(push_speed), target_block.y, obj_wall_collisions)) {
+            target_block.x += sign(push_speed);
+        }
+    }
+}
+
+
+
+
+
 // Setup
 getControls();
 
@@ -13,13 +54,25 @@ xSpeed = moveDir * moveSpeed[runType];
 // X collision
 var _subPixel = .5;
 if place_meeting(x + xSpeed, y ,  obj_wall_collisions) {
+	
+	// Check for slope
+	if !place_meeting(x + xSpeed, y - abs(xSpeed)-1, obj_wall_collisions) {
+		while place_meeting(x + xSpeed, y, obj_wall_collisions) {y -= _subPixel}
+	} else {	
 	// moves as close to wall precisely
-	var _pixelCheck = _subPixel * sign(xSpeed);
-	while !place_meeting(x + _pixelCheck, y , obj_wall_collisions) {
-		x += _pixelCheck;
+		var _pixelCheck = _subPixel * sign(xSpeed);
+		while !place_meeting(x + _pixelCheck, y , obj_wall_collisions) {
+			x += _pixelCheck;
+		}
+		xSpeed = 0;
+		onWall = true;
 	}
-	xSpeed = 0;
-	onWall = true;
+
+}
+
+//Go down slopes
+if ySpeed >= 0 && !place_meeting(x + xSpeed, y + 1, obj_wall_collisions) && place_meeting(x +xSpeed, y + abs(xSpeed)+1, obj_wall_collisions) {
+	while !place_meeting(x + xSpeed, y + _subPixel, obj_wall_collisions) { y+= _subPixel}
 }
 
 //Move
@@ -105,8 +158,8 @@ y += ySpeed;
 if abs(xSpeed) > 0 { sprite_index = runType ? runSpr : walkSpr}
 if xSpeed == 0 {sprite_index = idleSpr}
 if !onGround {
-	if (onWall){
-		sprite_index = wallSlideSpr
+	if (onWall && ySpeed >= 0){
+		sprite_index = wallSlideSpr[moveDir == 1 ? 0 : 1]
 	} else {
 		sprite_index = jumpSpr
 	}	
@@ -127,7 +180,7 @@ if (keyboard_check_pressed(vk_f2)) {
 }
 
 if (keyboard_check_pressed(vk_f3)) {
-	show_debug_message(tolerance)
+	msg("Tolerance", tolerance)
     tolerance += .1;
 }
 

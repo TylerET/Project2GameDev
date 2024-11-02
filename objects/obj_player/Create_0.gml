@@ -4,7 +4,8 @@ walkSpr = spr_player_walk;
 runSpr = spr_player_run_knife
 jumpSpr = spr_player_jump;
 jumpFlipSpr = spr_player_jump_flip;
-wallSlideSpr = spr_player_wall_slide
+wallSlideSpr[0] = spr_player_wall_slide;
+wallSlideSpr[1] = spr_player_wall_slide_left;
 
 #endregion
 

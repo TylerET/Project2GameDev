@@ -1,10 +1,10 @@
 {
   "$GMSprite":"",
   "%Name":"spr_player_idle_knife",
-  "bboxMode":0,
+  "bboxMode":2,
   "bbox_bottom":39,
   "bbox_left":14,
-  "bbox_right":33,
+  "bbox_right":29,
   "bbox_top":10,
   "collisionKind":1,
   "collisionTolerance":0,

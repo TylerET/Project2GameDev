@@ -8,7 +8,7 @@ draw_sprite(spr_concept_background_bright, 0, 0, 0);
 
 shader_reset();
 
-// Activate the shader
+// //Activate the shader
 //shader_set(Shader5);
 
 //// Set the player's screen position in the shader
