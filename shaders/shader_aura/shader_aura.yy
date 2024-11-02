@@ -1,7 +1,7 @@
 {
   "$GMShader":"",
-  "%Name":"Shader5",
-  "name":"Shader5",
+  "%Name":"shader_aura",
+  "name":"shader_aura",
   "parent":{
     "name":"Shaders",
     "path":"folders/Shaders.yy",

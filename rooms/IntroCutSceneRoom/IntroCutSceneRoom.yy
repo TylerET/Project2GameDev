@@ -13,6 +13,7 @@
     {"name":"inst_4DCE78B5","path":"rooms/IntroCutSceneRoom/IntroCutSceneRoom.yy",},
     {"name":"inst_1D363381","path":"rooms/IntroCutSceneRoom/IntroCutSceneRoom.yy",},
     {"name":"inst_4184BD5B","path":"rooms/IntroCutSceneRoom/IntroCutSceneRoom.yy",},
+    {"name":"inst_5B7E468C","path":"rooms/IntroCutSceneRoom/IntroCutSceneRoom.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -30,7 +31,9 @@
           -3983,-2147483648,-9,0,-19,-2147483648,1,0,-23,-2147483648,7,0,-2147483648,0,0,-2147483648,0,-2147483648,
           -73,0,1,24,-10,25,2,29,-2147483648,
         ],"TileDataFormat":1,},"tilesetId":{"name":"ts_placeholder","path":"tilesets/ts_placeholder/ts_placeholder.yy",},"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
-    {"$GMRInstanceLayer":"","%Name":"Background_Instance","depth":300,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[],"layers":[],"name":"Background_Instance","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
+    {"$GMRInstanceLayer":"","%Name":"Background_Instance","depth":300,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
+        {"$GMRInstance":"v1","%Name":"inst_5B7E468C","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_5B7E468C","objectId":{"name":"obj_background_controller","path":"objects/obj_background_controller/obj_background_controller.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":64.0,"y":32.0,},
+      ],"layers":[],"name":"Background_Instance","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRBackgroundLayer":"","%Name":"Background","animationFPS":30.0,"animationSpeedType":0,"colour":4294967295,"depth":400,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"hspeed":0.0,"htiled":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Background","properties":[],"resourceType":"GMRBackgroundLayer","resourceVersion":"2.0","spriteId":{"name":"spr_concept_background_bright","path":"sprites/spr_concept_background_bright/spr_concept_background_bright.yy",},"stretch":false,"userdefinedAnimFPS":false,"userdefinedDepth":false,"visible":true,"vspeed":0.0,"vtiled":false,"x":0,"y":0,},
   ],
   "name":"IntroCutSceneRoom",

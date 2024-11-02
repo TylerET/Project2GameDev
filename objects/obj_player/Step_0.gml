@@ -8,7 +8,6 @@ if (global.paused) {
 // Step Event of obj_player
 if (place_meeting(x, y, obj_camera_transition)) {
     global.fullRoomCamera = true;
-	instance_create_layer(x, y, "Background_Instance", obj_background_controller)
 } else {
     global.fullRoomCamera = false;
 }
@@ -193,6 +192,8 @@ if (keyboard_check_pressed(vk_f4)) {
 if (keyboard_check_pressed(ord("R"))) {
 	game_restart()
 }
+
+
 
 
 
