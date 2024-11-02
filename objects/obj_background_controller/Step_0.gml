@@ -17,15 +17,5 @@ if (keyboard_check_pressed(ord("F"))) {
 	auraState *= -1
 }
 
-// In the Step event of a controller object
-if (keyboard_check_pressed(ord("B"))) {
-    bullet_time = !bullet_time;
-    if (bullet_time) {
-        game_set_speed(room_speed * bullet_time_speed, gamespeed_fps);
-    } else {
-        game_set_speed(default_room_speed, default_gamespeed_fps);
-    }
-}
-
 
 

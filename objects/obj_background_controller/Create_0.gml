@@ -10,9 +10,4 @@ max_radius = 500; // Adjust based on the desired area coverage
 auraState = -1;
 
 
-bullet_time = false;
-bullet_time_speed = 0.2; // 20% of normal speed
 
-
-default_room_speed = room_speed
-default_gamespeed_fps = gamespeed_fps
