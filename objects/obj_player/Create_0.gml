@@ -9,7 +9,7 @@ wallSlideSpr[1] = spr_player_wall_slide_left;
 
 #endregion
 
-
+hp = 100;
 
 #region Movement
 controlsSetup();

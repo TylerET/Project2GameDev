@@ -9,12 +9,23 @@ if (cutoff > 1.0) {
 
 // Gradually increase the radius for the grayscale effect
 
-
-calcRadius = effect_radius  + (10 * auraState)
+calcRadius = auraState == -1 ?  obj_player.hp + (10 * auraState) : effect_radius  + (10 * auraState)
 effect_radius = clamp(calcRadius, 0 , max_radius)
 
 
 if (keyboard_check_pressed(ord("F"))) {
 	auraState *= -1
 }
+
+// In the Step event of a controller object
+if (keyboard_check_pressed(ord("B"))) {
+    bullet_time = !bullet_time;
+    if (bullet_time) {
+        game_set_speed(room_speed * bullet_time_speed, gamespeed_fps);
+    } else {
+        game_set_speed(default_room_speed, default_gamespeed_fps);
+    }
+}
+
+
 
