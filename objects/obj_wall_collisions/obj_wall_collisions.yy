@@ -6,8 +6,8 @@
   "name":"obj_wall_collisions",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Walls",
+    "path":"folders/Objects/Walls.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -32,5 +32,5 @@
     "path":"sprites/spr_wall_collisions/spr_wall_collisions.yy",
   },
   "spriteMaskId":null,
-  "visible":true,
+  "visible":false,
 }

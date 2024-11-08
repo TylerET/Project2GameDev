@@ -35,7 +35,4 @@ if jumpKeyBufferTimer > 0 {
 	jumpKeyBuffered = 0;
 }
 
-
-
-
 }
