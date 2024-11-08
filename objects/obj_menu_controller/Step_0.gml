@@ -1,5 +1,5 @@
 // Find the player's position to center the menu on them
-var player = instance_find(obj_player, 0); // Assumes only one player instance
+var player = instance_find(obj_player, 0);
 
 if (player != noone) {
     center_x = player.x;

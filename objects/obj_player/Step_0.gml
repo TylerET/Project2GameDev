@@ -14,27 +14,6 @@ if (place_meeting(x, y, obj_camera_transition)) {
 
 
 
-// Define push direction and speed
-var push_speed = 4;
-var target_block = instance_place(x + 1, y, obj_moveable); // Detect nearby obj_block
-
-// Only push if a specific instance of obj_block is near
-if (target_block != noone) {
-    // Calculate the target position for pushing horizontally
-    var target_x = target_block.x + push_speed;
-
-    // Check if the target instance of obj_block can move without collision
-    if (!place_meeting(target_x, target_block.y, obj_wall_collisions)) {
-        target_block.x = target_x; // Move the specific obj_block
-    } else {
-        // Handle collision by moving up to the collision boundary
-        while (!place_meeting(target_block.x + sign(push_speed), target_block.y, obj_wall_collisions)) {
-            target_block.x += sign(push_speed);
-        }
-    }
-}
-
-
 
 
 
@@ -196,7 +175,6 @@ if (keyboard_check_pressed(ord("R"))) {
 if (keyboard_check_pressed(ord("Q"))) {
 	hp -= 10;
 }
-
 
 
 
