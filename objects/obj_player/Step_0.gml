@@ -5,6 +5,12 @@ if (global.paused) {
 	image_speed = 1 
 }
 
+if (x < 0 || x > room_width) || (y < 0 | y > room_height) {
+	game_restart()
+}
+
+
+
 // Step Event of obj_player
 if (place_meeting(x, y, obj_camera_transition)) {
     global.fullRoomCamera = true;
@@ -138,6 +144,7 @@ if xSpeed == 0 {sprite_index = idleSpr}
 if !onGround {
 	if (onWall && ySpeed >= 0){
 		sprite_index = wallSlideSpr[moveDir == 1 ? 0 : 1]
+		image_speed = 0;
 	} else {
 		sprite_index = jumpSpr
 	}	
