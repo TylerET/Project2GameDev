@@ -54,6 +54,7 @@
     {"id":{"name":"obj_wall_slope_3","path":"objects/obj_wall_slope_3/obj_wall_slope_3.yy",},},
     {"id":{"name":"obj_wall_slope_4","path":"objects/obj_wall_slope_4/obj_wall_slope_4.yy",},},
     {"id":{"name":"DebugMovementRoom","path":"rooms/DebugMovementRoom/DebugMovementRoom.yy",},},
+    {"id":{"name":"HallWayLevel1Room","path":"rooms/HallWayLevel1Room/HallWayLevel1Room.yy",},},
     {"id":{"name":"IntroCutSceneRoom","path":"rooms/IntroCutSceneRoom/IntroCutSceneRoom.yy",},},
     {"id":{"name":"script_player_actions","path":"scripts/script_player_actions/script_player_actions.yy",},},
     {"id":{"name":"utility","path":"scripts/utility/utility.yy",},},
@@ -98,6 +99,7 @@
   "RoomOrderNodes":[
     {"roomId":{"name":"DebugMovementRoom","path":"rooms/DebugMovementRoom/DebugMovementRoom.yy",},},
     {"roomId":{"name":"IntroCutSceneRoom","path":"rooms/IntroCutSceneRoom/IntroCutSceneRoom.yy",},},
+    {"roomId":{"name":"HallWayLevel1Room","path":"rooms/HallWayLevel1Room/HallWayLevel1Room.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[
