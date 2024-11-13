@@ -5,6 +5,12 @@ if (global.paused) {
 	image_speed = 1 
 }
 
+if (x < 0 || x > room_width) || (y < 0 | y > room_height) {
+	game_restart()
+}
+
+
+
 // Step Event of obj_player
 if (place_meeting(x, y, obj_camera_transition)) {
     global.fullRoomCamera = true;

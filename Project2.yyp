@@ -33,7 +33,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.8.1.171",
+    "IDEVersion":"2024.6.2.162",
   },
   "name":"Project2",
   "resources":[
@@ -97,9 +97,9 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
+    {"roomId":{"name":"IntroCutSceneRoom","path":"rooms/IntroCutSceneRoom/IntroCutSceneRoom.yy",},},
     {"roomId":{"name":"DebugMovementRoom","path":"rooms/DebugMovementRoom/DebugMovementRoom.yy",},},
     {"roomId":{"name":"WinScreenRoom","path":"rooms/WinScreenRoom/WinScreenRoom.yy",},},
-    {"roomId":{"name":"IntroCutSceneRoom","path":"rooms/IntroCutSceneRoom/IntroCutSceneRoom.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[
