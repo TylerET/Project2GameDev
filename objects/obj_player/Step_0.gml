@@ -138,6 +138,7 @@ if xSpeed == 0 {sprite_index = idleSpr}
 if !onGround {
 	if (onWall && ySpeed >= 0){
 		sprite_index = wallSlideSpr[moveDir == 1 ? 0 : 1]
+		image_speed = 0;
 	} else {
 		sprite_index = jumpSpr
 	}	

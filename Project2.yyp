@@ -33,7 +33,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.6.2.162",
+    "IDEVersion":"2024.8.1.171",
   },
   "name":"Project2",
   "resources":[
@@ -55,6 +55,7 @@
     {"id":{"name":"obj_wall_slope_4","path":"objects/obj_wall_slope_4/obj_wall_slope_4.yy",},},
     {"id":{"name":"DebugMovementRoom","path":"rooms/DebugMovementRoom/DebugMovementRoom.yy",},},
     {"id":{"name":"IntroCutSceneRoom","path":"rooms/IntroCutSceneRoom/IntroCutSceneRoom.yy",},},
+    {"id":{"name":"WinScreenRoom","path":"rooms/WinScreenRoom/WinScreenRoom.yy",},},
     {"id":{"name":"script_player_actions","path":"scripts/script_player_actions/script_player_actions.yy",},},
     {"id":{"name":"utility","path":"scripts/utility/utility.yy",},},
     {"id":{"name":"shader_aura","path":"shaders/shader_aura/shader_aura.yy",},},
@@ -97,6 +98,7 @@
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
     {"roomId":{"name":"DebugMovementRoom","path":"rooms/DebugMovementRoom/DebugMovementRoom.yy",},},
+    {"roomId":{"name":"WinScreenRoom","path":"rooms/WinScreenRoom/WinScreenRoom.yy",},},
     {"roomId":{"name":"IntroCutSceneRoom","path":"rooms/IntroCutSceneRoom/IntroCutSceneRoom.yy",},},
   ],
   "templateType":"game",
