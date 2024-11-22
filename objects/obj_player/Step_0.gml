@@ -5,6 +5,46 @@ if (global.paused) {
 	image_speed = 1 
 }
 
+#region unlockable controls 
+// at the top because dash ignores gravity and animations-- dashing into diagonal corners is broken right now, fix!!!
+
+if (keyboard_check_pressed(vk_alt) and can_dash) { //add conditions to have abilities! *** (must have red color for dash)
+	// add dash sfx!
+	is_dashing = true
+	can_dash = false
+	alarm[0] = dash_duration * 30
+	sprite_index = dashSpr
+	image_index = 0
+	
+	dash_x = rightKey - leftKey
+	dash_y = downKey - upKey //down - up because inverted y axis
+	
+	if (dash_x != 0 and dash_y != 0) { //diagonal dash
+		var _length = sqrt(power(dash_x, 2) + power(dash_y, 2))
+		xSpeed = (dash_x / _length) * dash_speed
+		ySpeed = (dash_y / _length) * dash_speed
+	} else if (dash_x != 0 or dash_y != 0) { //cardinal dash
+		xSpeed = dash_x * dash_speed
+		ySpeed = dash_y * dash_speed
+	} else { // default dash (direction of player)
+		xSpeed = faceDir * dash_speed
+		ySpeed = 0
+	}
+}
+
+#endregion
+
+#region dash
+if (is_dashing) {
+	
+	x += xSpeed
+	y += ySpeed
+	if(image_index == 4)
+		image_speed = 0
+	exit //skip other handling -- make sure collisions still work!
+}
+#endregion
+
 if (x < 0 || x > room_width) || (y < 0 | y > room_height) {
 	game_restart()
 }
@@ -17,9 +57,6 @@ if (place_meeting(x, y, obj_camera_transition)) {
 } else {
     global.fullRoomCamera = false;
 }
-
-
-
 
 
 
@@ -182,8 +219,3 @@ if (keyboard_check_pressed(ord("R"))) {
 if (keyboard_check_pressed(ord("Q"))) {
 	hp -= 10;
 }
-
-
-
-
-

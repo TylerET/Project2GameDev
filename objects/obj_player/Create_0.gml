@@ -6,6 +6,7 @@ jumpSpr = spr_player_jump;
 jumpFlipSpr = spr_player_jump_flip;
 wallSlideSpr[0] = spr_player_wall_slide;
 wallSlideSpr[1] = spr_player_wall_slide_left;
+dashSpr = spr_player_dash
 
 #endregion
 
@@ -60,6 +61,11 @@ shaderActive3 = false;
 tolerance = 0;
 
 
-
-
-
+//Abilities:
+is_dashing = false
+can_dash = true
+dash_speed = 10
+dash_x = 0
+dash_y = 0
+dash_duration = 0.3 //in seconds
+dash_cd = 1 //in seconds
