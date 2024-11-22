@@ -25,7 +25,7 @@ ySpeed = 0;
 
 // Jumping
 grav = .275;
-terminalVelocity = 4;
+terminalVelocity = 6;
 onGround = true;
 jumpSpeed = -3.15;
 jumpMax = 2;

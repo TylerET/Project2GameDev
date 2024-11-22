@@ -41,7 +41,7 @@ if (is_dashing) {
 	y += ySpeed
 	if(image_index == 4)
 		image_speed = 0
-	exit //skip other handling -- make sure collisions still work!
+	exit //exit scripts below
 }
 #endregion
 
@@ -168,6 +168,7 @@ if (place_meeting(x, y + ySpeed, obj_wall_collisions)) {
 
 if (ySpeed >= 0 && place_meeting(x, y+1, obj_wall_collisions)){
 	setOnGround(true);
+	can_dash = true //recover dash on touching ground
 }
 
 //Move
@@ -184,6 +185,15 @@ if !onGround {
 		image_speed = 0;
 	} else {
 		sprite_index = jumpSpr
+		//make falling sprite less wobbly
+		image_speed = 0
+		if (abs(ySpeed) < 1.5) { //mid-jump, can adjust 
+			image_index = 1
+		} else if (ySpeed > 0) {//if falling down
+			image_index = 2
+		} else { //if rising up
+			image_index = 0
+		}
 	}	
 }
 mask_index = idleSpr
