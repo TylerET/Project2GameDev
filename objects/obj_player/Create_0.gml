@@ -39,6 +39,26 @@ coyoteJumpTimer = 0;
 // Wall slide
 onWall = false;
 
+function checkForSemiSolidPlatform(_x, _y)
+{
+	var _return = noone;
+	if ySpeed >= 0 && place_meeting(_x, _y, obj_semi_solid_wall)
+	{
+		var _list = ds_list_create();
+		var _listSize = instance_place_list(_x, _y, obj_semi_solid_wall, _list, false);
+		for (var i = 0; i < _listSize; i++)
+		{
+			var _listInst = _list[| i];
+			if _listInst != forgetSemiSolid && floor(bbox_bottom) <= ceil(_listInst.bbox_top - _listInst.ySpeed)
+			{
+				_return =  _listInst;
+				i = _listSize;
+			}
+		}
+		ds_list_destroy(_list);
+	}
+}
+
 function setOnGround(_val = true){
 	if _val {
 		onGround = true;
@@ -75,4 +95,6 @@ dash_cd = 1 //in seconds
 //Moving Platforms
 myFloorPlat = noone;
 movePlatXspeed = 0;
+downSlopeSemiSolid = noone;
+forgetSemiSolid = noone;
 depth = -30

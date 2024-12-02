@@ -92,8 +92,14 @@ if place_meeting(x + xSpeed, y ,  obj_wall_collisions) {
 }
 
 //Go down slopes
+downSlopeSemiSolid = noone;
 if ySpeed >= 0 && !place_meeting(x + xSpeed, y + 1, obj_wall_collisions) && place_meeting(x +xSpeed, y + abs(xSpeed)+1, obj_wall_collisions) {
-	while !place_meeting(x + xSpeed, y + _subPixel, obj_wall_collisions) { y+= _subPixel}
+	downSlopeSemiSolid = checkForSemiSolidPlatform(x + xSpeed, y + abs(xSpeed) + 1);
+	if !instance_exists(downSlopeSemiSolid)
+	{
+		while !place_meeting(x + xSpeed, y + _subPixel, obj_wall_collisions) { y+= _subPixel}
+
+	}
 }
 
 //Move
@@ -128,7 +134,7 @@ if ySpeed > terminalVelocity {
 		if (jumpCount == 0 && coyoteJumpTimer <= 0) { jumpCount = 1;}
 	}
 
-if jumpKeyBuffered && jumpCount < jumpMax {
+if !downKey && jumpKeyBuffered && jumpCount < jumpMax {
 	jumpKeyBuffered = false;
 	jumpKeyBufferTimer = 0;
 	if (jumpCount != 0) {
@@ -151,26 +157,6 @@ if (jumpHoldTimer > 0){
 }
 
 // Y collision
-//var _subPixel = .5;
-//if (place_meeting(x, y + ySpeed, obj_wall_collisions)) {
-//    // moves as close to floor precisely
-//	var _pixelCheck = _subPixel * sign(ySpeed);
-//	while !place_meeting(x, y + _pixelCheck, obj_wall_collisions) {
-//		y += _pixelCheck;
-//	}
-//	//Bonk head check
-//	if (ySpeed < 0){
-//		jumpHoldTimer = 0;
-//	}
-	
-//	ySpeed = 0;
-//}
-
-//if (ySpeed >= 0 && place_meeting(x, y+1, obj_wall_collisions)){
-//	setOnGround(true);
-//	can_dash = true //recover dash on touching ground
-//}
-
 // Moving Platform
 
 var _clampYspeed = max(0, ySpeed);
@@ -180,7 +166,8 @@ array_push(_array, obj_wall_collisions, obj_semi_solid_wall);
 var _listSize = instance_place_list(x, y+ 1 + _clampYspeed + terminalVelocity, _array, _list, false);
 for (var i = 0; i < _listSize; i++) {
 	var _listInst = _list[| i];
-	if (_listInst.ySpeed <= ySpeed || instance_exists(myFloorPlat))
+	if _listInst != forgetSemiSolid
+	&& (_listInst.ySpeed <= ySpeed || instance_exists(myFloorPlat))
 	&& (_listInst.ySpeed > 0 || place_meeting(x, y+ 1 +  _clampYspeed, _listInst))
 	{
 		if _listInst.object_index == obj_wall_collisions 
@@ -219,9 +206,30 @@ if instance_exists(myFloorPlat)
 		}
 		y = floor(y);
 	}
+	if (ySpeed < 0){
+		jumpHoldTimer = 0;
+	}
 	ySpeed = 0;
 	setOnGround(true);
 	can_dash = true;
+}
+
+// Manually fall through semi solid;
+if downKey && jumpKeyPressed
+{
+	if instance_exists(myFloorPlat)
+	&& (myFloorPlat.object_index == obj_semi_solid_wall || object_is_ancestor(myFloorPlat.object_index, obj_semi_solid_wall))
+	{
+		var _yCheck = max(1, myFloorPlat.ySpeed + 1);
+		if !place_meeting(x, _yCheck, obj_wall_collisions)
+		{
+			y += 1;
+			ySpeed = _yCheck - 1;
+			forgetSemiSolid = myFloorPlat;
+			setOnGround(false);
+		}
+		
+	}
 }
 
 
@@ -230,6 +238,27 @@ if instance_exists(myFloorPlat)
 //Move
 y += ySpeed;
 
+if forgetSemiSolid && !place_meeting(x, y, forgetSemiSolid) forgetSemiSolid = noone;
+
+// final moving platform logic
+movePlatXspeed = 0;
+if instance_exists(myFloorPlat)
+{
+	movePlatXspeed = myFloorPlat.xSpeed;
+}
+
+if place_meeting(x + movePlatXspeed, y ,obj_wall_collisions)
+{
+	var _subPixel = .5;
+	var _pixelCheck = _subPixel * sign(movePlatXspeed);
+	while !place_meeting(x + _pixelCheck, y, obj_wall_collisions)
+	{
+		x += _pixelCheck
+	}
+	movePlatXspeed = 0;
+}
+x += movePlatXspeed;
+
 if instance_exists(myFloorPlat) 
 && myFloorPlat.ySpeed != 0
 {
@@ -237,6 +266,26 @@ if instance_exists(myFloorPlat)
 	&& myFloorPlat.bbox_top >= bbox_bottom - terminalVelocity
 	{
 		y = myFloorPlat.bbox_top;
+	}
+	
+	if myFloorPlat.ySpeed < 0
+	&& place_meeting(x, y + myFloorPlat.ySpeed, obj_wall_collisions)
+	{
+		if myFloorPlat.object_index == obj_semi_solid_wall
+		|| object_is_ancestor(myFloorPlat.object_index, obj_semi_solid_wall)
+		{
+			var _subPixel = .25
+			while place_meeting(x, y + myFloorPlat.ySpeed, obj_wall_collisions)
+			{
+				y += _subPixel;
+			}
+			while place_meeting(x, y, obj_wall_collisions)
+			{
+				y -= _subPixel;
+			}
+			y = round(y);
+		}
+		setOnGround(false);
 	}
 }
 
