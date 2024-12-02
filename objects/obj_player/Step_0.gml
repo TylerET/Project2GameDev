@@ -45,6 +45,62 @@ if (is_dashing) {
 }
 #endregion
 
+#region Emerald Guard
+// Define colors
+var color_white = make_color_rgb(255, 255, 255);
+var color_green = make_color_rgb(0, 255, 0);
+
+if (shield_cooldown > 0) 
+{
+    shield_cooldown--;
+}
+
+if (has_green_ability && shield_cooldown <= 0)
+{
+    if (keyboard_check(vk_lcontrol) && !is_shield_active) 
+	{
+        is_shield_active = true; // Activate shield
+    }
+}
+
+if (is_shield_active) 
+{
+    shield_timer++;
+
+    // Calculate fade effect
+    var remaining_time_ratio = (shield_active_time - shield_timer) / shield_active_time;
+    var fade_color = color_lerp(color_white, color_green, remaining_time_ratio); // Lerp between white and green
+    image_blend = fade_color;
+
+    if (shield_timer >= shield_active_time)
+	{
+        is_shield_active = false; // Deactivate shield
+        shield_timer = 0;
+        shield_cooldown = shield_recharge_time; // Start cooldown
+    }
+} 
+else
+{
+    image_blend = color_white; // Reset to normal
+
+    if (!keyboard_check(vk_lcontrol)) {
+        shield_timer = 0;
+    }
+}
+
+// Shield functionality
+if (is_shield_active) 
+{
+    var _collision = instance_place(x, y + 1, all);
+
+    if (_collision != noone && _collision.visible) 
+	{
+        ySpeed = -bounce_strength; 
+    }
+}
+#endregion
+
+
 if (x < 0 || x > room_width) || (y < 0 | y > room_height) {
 	game_restart()
 }

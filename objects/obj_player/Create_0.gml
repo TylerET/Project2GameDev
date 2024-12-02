@@ -69,3 +69,15 @@ dash_x = 0
 dash_y = 0
 dash_duration = 0.3 //in seconds
 dash_cd = 1 //in seconds
+
+var color_white = make_color_rgb(255, 255, 255);
+var color_green = make_color_rgb(0, 255, 0);
+
+has_green_ability = true; // Tracks green cooldown
+is_shield_active = false;  // Track if the shield is active
+bounce_strength = 10;       // Strength of the bounce
+
+shield_timer = 0;          // Shield duration
+shield_cooldown = 0;       // Cooldown duration
+shield_recharge_time = 300; // 5 seconds
+shield_active_time = 180;   // 3 seconds

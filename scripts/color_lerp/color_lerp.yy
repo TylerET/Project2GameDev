@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"color_lerp",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"color_lerp",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
