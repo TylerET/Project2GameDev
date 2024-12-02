@@ -151,28 +151,95 @@ if (jumpHoldTimer > 0){
 }
 
 // Y collision
-var _subPixel = .5;
-if (place_meeting(x, y + ySpeed, obj_wall_collisions)) {
-    // moves as close to floor precisely
-	var _pixelCheck = _subPixel * sign(ySpeed);
-	while !place_meeting(x, y + _pixelCheck, obj_wall_collisions) {
-		y += _pixelCheck;
-	}
-	//Bonk head check
-	if (ySpeed < 0){
-		jumpHoldTimer = 0;
+//var _subPixel = .5;
+//if (place_meeting(x, y + ySpeed, obj_wall_collisions)) {
+//    // moves as close to floor precisely
+//	var _pixelCheck = _subPixel * sign(ySpeed);
+//	while !place_meeting(x, y + _pixelCheck, obj_wall_collisions) {
+//		y += _pixelCheck;
+//	}
+//	//Bonk head check
+//	if (ySpeed < 0){
+//		jumpHoldTimer = 0;
+//	}
+	
+//	ySpeed = 0;
+//}
+
+//if (ySpeed >= 0 && place_meeting(x, y+1, obj_wall_collisions)){
+//	setOnGround(true);
+//	can_dash = true //recover dash on touching ground
+//}
+
+// Moving Platform
+
+var _clampYspeed = max(0, ySpeed);
+var _list = ds_list_create();
+var _array = array_create(0);
+array_push(_array, obj_wall_collisions, obj_semi_solid_wall);
+var _listSize = instance_place_list(x, y+ 1 + _clampYspeed + terminalVelocity, _array, _list, false);
+for (var i = 0; i < _listSize; i++) {
+	var _listInst = _list[| i];
+	if (_listInst.ySpeed <= ySpeed || instance_exists(myFloorPlat))
+	&& (_listInst.ySpeed > 0 || place_meeting(x, y+ 1 +  _clampYspeed, _listInst))
+	{
+		if _listInst.object_index == obj_wall_collisions 
+		|| object_is_ancestor(_listInst.object_index, obj_wall_collisions)
+		|| floor(bbox_bottom) <= ceil(_listInst.bbox_top - _listInst.ySpeed)
+		{
+			if !instance_exists(myFloorPlat)
+			|| _listInst.bbox_top + _listInst.ySpeed <= myFloorPlat.bbox_top + myFloorPlat.ySpeed
+			|| _listInst.bbox_top + _listInst.ySpeed <= bbox_bottom
+			{
+				myFloorPlat = _listInst;
+			}
+		}
 	}
 	
-	ySpeed = 0;
+}
+ds_list_destroy(_list);
+
+if instance_exists(myFloorPlat) && !place_meeting(x, y + terminalVelocity, myFloorPlat) 
+{
+	myFloorPlat = noone;
 }
 
-if (ySpeed >= 0 && place_meeting(x, y+1, obj_wall_collisions)){
+if instance_exists(myFloorPlat)
+{
+	var _subPixel = .5;
+	while !place_meeting(x, y + _subPixel, myFloorPlat) && !place_meeting(x, y , obj_wall_collisions)
+	{
+		y += _subPixel;
+	}
+	if myFloorPlat.object_index == obj_semi_solid_wall || object_is_ancestor(myFloorPlat.object_index, obj_semi_solid_wall)
+	{
+		while place_meeting(x, y, myFloorPlat)
+		{
+			y -= _subPixel;
+		}
+		y = floor(y);
+	}
+	ySpeed = 0;
 	setOnGround(true);
-	can_dash = true //recover dash on touching ground
+	can_dash = true;
 }
+
+
+
 
 //Move
 y += ySpeed;
+
+if instance_exists(myFloorPlat) 
+&& myFloorPlat.ySpeed != 0
+{
+	if !place_meeting(x, myFloorPlat.bbox_top, obj_wall_collisions)
+	&& myFloorPlat.bbox_top >= bbox_bottom - terminalVelocity
+	{
+		y = myFloorPlat.bbox_top;
+	}
+}
+
 	
 #endregion
 

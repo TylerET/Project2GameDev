@@ -46,6 +46,7 @@ function setOnGround(_val = true){
 	} else {
 		onGround = false;
 		coyoteHangTimer = 0;
+		myFloorPlat = noone;
 	}
 }
 
@@ -69,3 +70,9 @@ dash_x = 0
 dash_y = 0
 dash_duration = 0.3 //in seconds
 dash_cd = 1 //in seconds
+
+
+//Moving Platforms
+myFloorPlat = noone;
+movePlatXspeed = 0;
+depth = -30
