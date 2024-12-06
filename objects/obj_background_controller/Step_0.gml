@@ -2,10 +2,14 @@
 // You can write your code in this editor
 if (global.paused) { exit }
 
-cutoff += 0.001; // Adjust the speed as needed
+if (playIntro)
+{
+	cutoff += 0.001; // Adjust the speed as needed
 if (cutoff > 1.0) {
     cutoff = 1.0; // Cap at 1.0 to prevent overflow
 }
+}
+
 
 // Gradually increase the radius for the grayscale effect
 

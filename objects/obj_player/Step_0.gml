@@ -256,13 +256,14 @@ if instance_exists(myFloorPlat)
 	can_dash = true;
 }
 
+
 // Manually fall through semi solid;
 if downKey && jumpKeyPressed
 {
 	if instance_exists(myFloorPlat)
 	&& (myFloorPlat.object_index == obj_semi_solid_wall || object_is_ancestor(myFloorPlat.object_index, obj_semi_solid_wall))
 	{
-		var _yCheck = max(1, myFloorPlat.ySpeed + 1);
+		var _yCheck = y + max(1, myFloorPlat.ySpeed + 1);
 		if !place_meeting(x, _yCheck, obj_wall_collisions)
 		{
 			y += 1;
@@ -380,7 +381,7 @@ if (keyboard_check_pressed(vk_f4)) {
 	shaderActive2 = false;
 }
 
-if (keyboard_check_pressed(ord("R"))) {
+if (keyboard_check_pressed(ord("R"))  && !keyboard_check(vk_control)) {
 	game_restart()
 }
 
@@ -388,13 +389,10 @@ if (keyboard_check_pressed(ord("R"))  && keyboard_check(vk_control)) {
 
 	if isRecording
 	{
-	    if !instance_exists(obj_player_ghost) 
-		{
         var ghost = instance_create_layer(x, y, "Instances", obj_player_ghost);
 		isRecording = false;
 		current_frame = 0;
 		ds_list_copy(global.last_recorded_actions, global.player_actions)
-		} 
 	} else 
 	{
 		display_text = "Recording...";

@@ -1,5 +1,4 @@
-/// @description Insert description here
-// You can write your code in this editor
+playIntro = false;
 cutoff = 0.0;
 
 

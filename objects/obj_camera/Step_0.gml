@@ -12,8 +12,9 @@ if keyboard_check_pressed(vk_f12) {
     global.fullRoomCamera = !global.fullRoomCamera; 
 }
 
+
 var targetWidth = global.fullRoomCamera ? room_width : global.defaultCamWidth;
-var targetHeight = global.fullRoomCamera ? room_height : global.defaultCamHeight;
+var targetHeight = global.fullRoomCamera ? room_height: global.defaultCamHeight;
 
 // Smoothly transition camera size
 var currentWidth = camera_get_view_width(view_camera[0]);
