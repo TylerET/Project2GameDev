@@ -13,8 +13,8 @@
     "path":"folders/Objects/Walls.yy",
   },
   "parentObjectId":{
-    "name":"obj_semi_solid_platform",
-    "path":"objects/obj_semi_solid_platform/obj_semi_solid_platform.yy",
+    "name":"obj_semi_solid_wall",
+    "path":"objects/obj_semi_solid_wall/obj_semi_solid_wall.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

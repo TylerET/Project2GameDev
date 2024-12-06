@@ -263,7 +263,7 @@ if downKey && jumpKeyPressed
 	if instance_exists(myFloorPlat)
 	&& (myFloorPlat.object_index == obj_semi_solid_wall || object_is_ancestor(myFloorPlat.object_index, obj_semi_solid_wall))
 	{
-		var _yCheck = max(1, myFloorPlat.ySpeed + 1);
+		var _yCheck = y + max(1, myFloorPlat.ySpeed + 1);
 		if !place_meeting(x, _yCheck, obj_wall_collisions)
 		{
 			y += 1;
