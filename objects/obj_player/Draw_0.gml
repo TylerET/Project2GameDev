@@ -30,3 +30,9 @@ draw_rectangle(mask_left, mask_top, mask_right, mask_bottom, false);
 draw_set_color(c_white);
 draw_set_alpha(1);
 }
+
+if (text_timer > 0) {
+    var text_x = x - sprite_width;
+    var text_y = y - sprite_height / 2 - 50;
+    draw_text(text_x, text_y, display_text);
+}

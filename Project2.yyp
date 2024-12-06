@@ -43,6 +43,7 @@
     {"id":{"name":"obj_game_controller","path":"objects/obj_game_controller/obj_game_controller.yy",},},
     {"id":{"name":"obj_menu_controller","path":"objects/obj_menu_controller/obj_menu_controller.yy",},},
     {"id":{"name":"obj_menu_option","path":"objects/obj_menu_option/obj_menu_option.yy",},},
+    {"id":{"name":"obj_player_ghost","path":"objects/obj_player_ghost/obj_player_ghost.yy",},},
     {"id":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},},
     {"id":{"name":"obj_semi_solid_platform","path":"objects/obj_semi_solid_platform/obj_semi_solid_platform.yy",},},
     {"id":{"name":"obj_semi_solid_wall","path":"objects/obj_semi_solid_wall/obj_semi_solid_wall.yy",},},
@@ -97,8 +98,8 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
-    {"roomId":{"name":"IntroCutSceneRoom","path":"rooms/IntroCutSceneRoom/IntroCutSceneRoom.yy",},},
     {"roomId":{"name":"DebugMovementRoom","path":"rooms/DebugMovementRoom/DebugMovementRoom.yy",},},
+    {"roomId":{"name":"IntroCutSceneRoom","path":"rooms/IntroCutSceneRoom/IntroCutSceneRoom.yy",},},
     {"roomId":{"name":"WinScreenRoom","path":"rooms/WinScreenRoom/WinScreenRoom.yy",},},
   ],
   "templateType":"game",
