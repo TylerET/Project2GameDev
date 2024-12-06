@@ -55,7 +55,7 @@ if (shield_cooldown > 0)
 
 if (has_green_ability && shield_cooldown <= 0)
 {
-    if (keyboard_check(vk_lcontrol) && !is_shield_active) 
+    if (keyboard_check(ord("Q")) && !is_shield_active) 
 	{
         is_shield_active = true; // Activate shield
     }
@@ -431,12 +431,7 @@ if (keyboard_check_pressed(ord("R"))) {
 	game_restart()
 }
 
-if (keyboard_check_pressed(ord("Q"))) {
-	hp -= 10;
-}
-
-
-if (keyboard_check_pressed(ord("T"))) {
+if (keyboard_check_pressed(ord("R"))  && keyboard_check(vk_control)) {
 
 	if isRecording
 	{

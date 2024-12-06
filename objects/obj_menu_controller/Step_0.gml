@@ -10,7 +10,7 @@ if (player != noone) {
 if (mouse_check_button(mb_right)) {
 	if !bullet_time {
 		bullet_time = true
-        game_set_speed(room_speed * bullet_time_speed, gamespeed_fps);
+        game_set_speed(room_speed * bullet_time_speed, default_gamespeed_fps);
 		}
     // Check if menu options already exist
     if (array_length(menu_options) == 0) {
