@@ -17,7 +17,6 @@ if (keyboard_check_pressed(ord("F"))) {
 	auraState *= -1
 }
 
-show_debug_message(cutoff)
 
 
 

@@ -1,6 +1,6 @@
 image_alpha = 0.5; // 50% transparency
 index = 0;
-loop = false;
+
 
 
 if variable_instance_exists(self, "action_queue") {
@@ -10,14 +10,21 @@ if variable_instance_exists(self, "action_queue") {
 	action_queue = ds_list_create();
 }
 
-if ds_list_size(global.player_actions) == 0 {
-    show_debug_message("global.player_actions is empty!");
-    instance_destroy(); // Destroy the ghost since there are no actions
-    exit;
+//if ds_list_size(global.player_actions) == 0 {
+//    show_debug_message("global.player_actions is empty!");
+//    instance_destroy(); // Destroy the ghost since there are no actions
+//    exit;
+//}
+
+
+if (is_callable(useFunction)) {
+    action_queue = useFunction();
+} else
+{
+	ds_list_copy(action_queue, global.player_actions)
 }
 
 
-ds_list_copy(action_queue, global.player_actions)
 
 
 

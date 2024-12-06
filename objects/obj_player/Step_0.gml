@@ -45,59 +45,6 @@ if (is_dashing) {
 }
 #endregion
 
-#region Emerald Guard
-// Define colors
-
-if (shield_cooldown > 0) 
-{
-    shield_cooldown--;
-}
-
-if (has_green_ability && shield_cooldown <= 0)
-{
-    if (keyboard_check(ord("Q")) && !is_shield_active) 
-	{
-        is_shield_active = true; // Activate shield
-    }
-}
-
-if (is_shield_active) 
-{
-    shield_timer++;
-
-    // Calculate fade effect
-    var remaining_time_ratio = (shield_active_time - shield_timer) / shield_active_time;
-    var fade_color = color_lerp(color_white, color_green, remaining_time_ratio); // Lerp between white and green
-    image_blend = fade_color;
-
-    if (shield_timer >= shield_active_time)
-	{
-        is_shield_active = false; // Deactivate shield
-        shield_timer = 0;
-        shield_cooldown = shield_recharge_time; // Start cooldown
-    }
-} 
-else
-{
-    image_blend = color_white; // Reset to normal
-
-    if (!keyboard_check(vk_lcontrol)) {
-        shield_timer = 0;
-    }
-}
-
-// Shield functionality
-if (is_shield_active) 
-{
-    var _collision = instance_place(x, y + 1, all);
-
-    if (_collision != noone && _collision.visible) 
-	{
-        ySpeed = -bounce_strength; 
-    }
-}
-#endregion
-
 #region Slomo
 if (slomo_active) {
     slomo_timer++;
@@ -248,6 +195,9 @@ if (jumpHoldTimer > 0){
 // Y collision
 // Moving Platform
 
+if (!is_shield_active)
+{
+var _clampYspeed = max(0, ySpeed);
 var _clampYspeed = max(0, ySpeed);
 var _list = ds_list_create();
 var _array = array_create(0);
@@ -274,6 +224,9 @@ for (var i = 0; i < _listSize; i++) {
 	
 }
 ds_list_destroy(_list);
+}
+
+
 
 if instance_exists(myFloorPlat) && !place_meeting(x, y + terminalVelocity, myFloorPlat) 
 {
@@ -453,11 +406,9 @@ if (keyboard_check_pressed(ord("R"))  && keyboard_check(vk_control)) {
 
 if (keyboard_check_pressed(ord("P"))) {
     if !instance_exists(obj_player_ghost) {
-		//var queue = load_action_queue("recorded_actions.json");
-		var queue = script_ghost_actions();
+		var queue = load_action_queue("recorded_actions.json");
 		global.player_actions = queue;
         var ghost = instance_create_layer(x, y, "Instances", obj_player_ghost);
-		ghost.loop = true;
     }
 }
 
@@ -470,6 +421,59 @@ if (keyboard_check_pressed(ord("S")) && keyboard_check(vk_control)) { // Press '
 		show_debug_message("No actions to save");
 	}
 }
+
+#region Emerald Guard
+// Define colors
+
+if (shield_cooldown > 0) 
+{
+    shield_cooldown--;
+}
+
+if (has_green_ability && shield_cooldown <= 0)
+{
+    if (keyboard_check(ord("Q")) && !is_shield_active) 
+	{
+        is_shield_active = true; // Activate shield
+    }
+}
+
+if (is_shield_active) 
+{
+    shield_timer++;
+
+    // Calculate fade effect
+    var remaining_time_ratio = (shield_active_time - shield_timer) / shield_active_time;
+    var fade_color = color_lerp(color_white, color_green, remaining_time_ratio); // Lerp between white and green
+    image_blend = fade_color;
+
+    if (shield_timer >= shield_active_time)
+	{
+        is_shield_active = false; // Deactivate shield
+        shield_timer = 0;
+        shield_cooldown = shield_recharge_time; // Start cooldown
+    }
+} 
+else
+{
+    image_blend = color_white; // Reset to normal
+
+    if (!keyboard_check(ord("Q"))) {
+        shield_timer = 0;
+    }
+}
+
+// Shield functionality
+if (is_shield_active) 
+{
+    var _collision = instance_place(x, y + 1, all);
+
+    if (_collision != noone && _collision.visible) 
+	{
+        ySpeed = -bounce_strength; 
+    }
+}
+#endregion
 
 
 
