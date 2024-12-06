@@ -1,3 +1,5 @@
+if (room == IntroCutSceneRoom && playIntro)
+{
 shader_set(shader_background_left_right);
 
 var cutoffUniform = shader_get_uniform(shader_background_left_right, "cutoff");
@@ -7,6 +9,8 @@ shader_set_uniform_f(cutoffUniform, cutoff);
 draw_sprite(spr_concept_background_bright, 0, 0, 0);
 
 shader_reset();
+}
+
 
 //// Activate the shader
 //shader_set(shader_aura);

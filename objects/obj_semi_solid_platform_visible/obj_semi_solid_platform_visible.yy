@@ -1,20 +1,20 @@
 {
   "$GMObject":"",
-  "%Name":"obj_semi_solid_platform",
+  "%Name":"obj_semi_solid_platform_visible",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":1,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_semi_solid_platform",
+  "name":"obj_semi_solid_platform_visible",
   "overriddenProperties":[],
   "parent":{
     "name":"Walls",
     "path":"folders/Objects/Walls.yy",
   },
   "parentObjectId":{
-    "name":"obj_semi_solid_wall",
-    "path":"objects/obj_semi_solid_wall/obj_semi_solid_wall.yy",
+    "name":"obj_semi_solid_platform",
+    "path":"objects/obj_semi_solid_platform/obj_semi_solid_platform.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -39,9 +39,12 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_semi_solid_platform",
-    "path":"sprites/spr_semi_solid_platform/spr_semi_solid_platform.yy",
+    "name":"spr_platforms",
+    "path":"sprites/spr_platforms/spr_platforms.yy",
   },
-  "spriteMaskId":null,
-  "visible":false,
+  "spriteMaskId":{
+    "name":"spr_platforms",
+    "path":"sprites/spr_platforms/spr_platforms.yy",
+  },
+  "visible":true,
 }

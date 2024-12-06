@@ -3,7 +3,7 @@
 if (global.paused) { exit }
 
 cutoff += 0.001; // Adjust the speed as needed
-if (cutoff > 1.0) {
+if (cutoff > 1.0 && playIntro) {
     cutoff = 1.0; // Cap at 1.0 to prevent overflow
 }
 

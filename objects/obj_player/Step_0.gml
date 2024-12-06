@@ -256,6 +256,7 @@ if instance_exists(myFloorPlat)
 	can_dash = true;
 }
 
+
 // Manually fall through semi solid;
 if downKey && jumpKeyPressed
 {
@@ -380,7 +381,7 @@ if (keyboard_check_pressed(vk_f4)) {
 	shaderActive2 = false;
 }
 
-if (keyboard_check_pressed(ord("R"))) {
+if (keyboard_check_pressed(ord("R"))  && !keyboard_check(vk_control)) {
 	game_restart()
 }
 
@@ -388,13 +389,10 @@ if (keyboard_check_pressed(ord("R"))  && keyboard_check(vk_control)) {
 
 	if isRecording
 	{
-	    if !instance_exists(obj_player_ghost) 
-		{
         var ghost = instance_create_layer(x, y, "Instances", obj_player_ghost);
 		isRecording = false;
 		current_frame = 0;
 		ds_list_copy(global.last_recorded_actions, global.player_actions)
-		} 
 	} else 
 	{
 		display_text = "Recording...";

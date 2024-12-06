@@ -1,15 +1,20 @@
 {
   "$GMObject":"",
-  "%Name":"obj_wall_collisions_next_room",
-  "eventList":[],
+  "%Name":"obj_cutscene_transition",
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
-  "name":"obj_wall_collisions_next_room",
+  "name":"obj_cutscene_transition",
   "overriddenProperties":[],
   "parent":{
-    "name":"Walls",
-    "path":"folders/Objects/Walls.yy",
+    "name":"Objects",
+    "path":"folders/Objects.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"obj_camera_transition",
+    "path":"objects/obj_camera_transition/obj_camera_transition.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -28,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_wall_collisions_next_room",
-    "path":"sprites/spr_wall_collisions_next_room/spr_wall_collisions_next_room.yy",
+    "name":"spr_camera_transition",
+    "path":"sprites/spr_camera_transition/spr_camera_transition.yy",
   },
   "spriteMaskId":null,
   "visible":false,
