@@ -1,7 +1,23 @@
+current_frame = 0;
+isRecording = false;
+global.player_actions = ds_list_create();
+global.last_recorded_actions = ds_list_create();
+
+// Above player head texts
+text_timer = 0;
+display_text = ""; 
+
+
+
+
+
+
+
+
 #region Sprites
-idleSpr = spr_player_idle_knife;
+idleSpr = spr_player_idle;
 walkSpr = spr_player_walk;
-runSpr = spr_player_run_knife
+runSpr = spr_player_run;
 jumpSpr = spr_player_jump;
 jumpFlipSpr = spr_player_jump_flip;
 wallSlideSpr[0] = spr_player_wall_slide;
@@ -39,6 +55,26 @@ coyoteJumpTimer = 0;
 // Wall slide
 onWall = false;
 
+function checkForSemiSolidPlatform(_x, _y)
+{
+	var _return = noone;
+	if ySpeed >= 0 && place_meeting(_x, _y, obj_semi_solid_wall)
+	{
+		var _list = ds_list_create();
+		var _listSize = instance_place_list(_x, _y, obj_semi_solid_wall, _list, false);
+		for (var i = 0; i < _listSize; i++)
+		{
+			var _listInst = _list[| i];
+			if _listInst != forgetSemiSolid && floor(bbox_bottom) <= ceil(_listInst.bbox_top - _listInst.ySpeed)
+			{
+				_return =  _listInst;
+				i = _listSize;
+			}
+		}
+		ds_list_destroy(_list);
+	}
+}
+
 function setOnGround(_val = true){
 	if _val {
 		onGround = true;
@@ -46,6 +82,7 @@ function setOnGround(_val = true){
 	} else {
 		onGround = false;
 		coyoteHangTimer = 0;
+		myFloorPlat = noone;
 	}
 }
 
@@ -70,6 +107,7 @@ dash_y = 0
 dash_duration = 0.3 //in seconds
 dash_cd = 1 //in seconds
 
+//Colors
 color_white = make_color_rgb(255, 255, 255);
 color_green = make_color_rgb(0, 255, 0);
 color_blue = make_color_rgb(0, 0, 255);
@@ -97,3 +135,9 @@ slomo_cooldown_duration = 5 * room_speed; // 5 second cooldown
 
 slomo_speed_factor = 0.75; 
 
+//Moving Platforms
+myFloorPlat = noone;
+movePlatXspeed = 0;
+downSlopeSemiSolid = noone;
+forgetSemiSolid = noone;
+depth = -30

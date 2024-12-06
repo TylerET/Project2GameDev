@@ -181,8 +181,14 @@ if place_meeting(x + xSpeed, y ,  obj_wall_collisions) {
 }
 
 //Go down slopes
+downSlopeSemiSolid = noone;
 if ySpeed >= 0 && !place_meeting(x + xSpeed, y + 1, obj_wall_collisions) && place_meeting(x +xSpeed, y + abs(xSpeed)+1, obj_wall_collisions) {
-	while !place_meeting(x + xSpeed, y + _subPixel, obj_wall_collisions) { y+= _subPixel}
+	downSlopeSemiSolid = checkForSemiSolidPlatform(x + xSpeed, y + abs(xSpeed) + 1);
+	if !instance_exists(downSlopeSemiSolid)
+	{
+		while !place_meeting(x + xSpeed, y + _subPixel, obj_wall_collisions) { y+= _subPixel}
+
+	}
 }
 
 //Move
@@ -217,7 +223,7 @@ if ySpeed > terminalVelocity {
 		if (jumpCount == 0 && coyoteJumpTimer <= 0) { jumpCount = 1;}
 	}
 
-if jumpKeyBuffered && jumpCount < jumpMax {
+if !downKey && jumpKeyBuffered && jumpCount < jumpMax {
 	jumpKeyBuffered = false;
 	jumpKeyBufferTimer = 0;
 	if (jumpCount != 0) {
@@ -240,28 +246,138 @@ if (jumpHoldTimer > 0){
 }
 
 // Y collision
-var _subPixel = .5;
-if (place_meeting(x, y + ySpeed, obj_wall_collisions)) {
-    // moves as close to floor precisely
-	var _pixelCheck = _subPixel * sign(ySpeed);
-	while !place_meeting(x, y + _pixelCheck, obj_wall_collisions) {
-		y += _pixelCheck;
+// Moving Platform
+
+var _clampYspeed = max(0, ySpeed);
+var _list = ds_list_create();
+var _array = array_create(0);
+array_push(_array, obj_wall_collisions, obj_semi_solid_wall);
+var _listSize = instance_place_list(x, y+ 1 + _clampYspeed + terminalVelocity, _array, _list, false);
+for (var i = 0; i < _listSize; i++) {
+	var _listInst = _list[| i];
+	if _listInst != forgetSemiSolid
+	&& (_listInst.ySpeed <= ySpeed || instance_exists(myFloorPlat))
+	&& (_listInst.ySpeed > 0 || place_meeting(x, y+ 1 +  _clampYspeed, _listInst))
+	{
+		if _listInst.object_index == obj_wall_collisions 
+		|| object_is_ancestor(_listInst.object_index, obj_wall_collisions)
+		|| floor(bbox_bottom) <= ceil(_listInst.bbox_top - _listInst.ySpeed)
+		{
+			if !instance_exists(myFloorPlat)
+			|| _listInst.bbox_top + _listInst.ySpeed <= myFloorPlat.bbox_top + myFloorPlat.ySpeed
+			|| _listInst.bbox_top + _listInst.ySpeed <= bbox_bottom
+			{
+				myFloorPlat = _listInst;
+			}
+		}
 	}
-	//Bonk head check
+	
+}
+ds_list_destroy(_list);
+
+if instance_exists(myFloorPlat) && !place_meeting(x, y + terminalVelocity, myFloorPlat) 
+{
+	myFloorPlat = noone;
+}
+
+if instance_exists(myFloorPlat)
+{
+	var _subPixel = .5;
+	while !place_meeting(x, y + _subPixel, myFloorPlat) && !place_meeting(x, y , obj_wall_collisions)
+	{
+		y += _subPixel;
+	}
+	if myFloorPlat.object_index == obj_semi_solid_wall || object_is_ancestor(myFloorPlat.object_index, obj_semi_solid_wall)
+	{
+		while place_meeting(x, y, myFloorPlat)
+		{
+			y -= _subPixel;
+		}
+		y = floor(y);
+	}
 	if (ySpeed < 0){
 		jumpHoldTimer = 0;
 	}
-	
 	ySpeed = 0;
+	setOnGround(true);
+	can_dash = true;
 }
 
-if (ySpeed >= 0 && place_meeting(x, y+1, obj_wall_collisions)){
-	setOnGround(true);
-	can_dash = true //recover dash on touching ground
+// Manually fall through semi solid;
+if downKey && jumpKeyPressed
+{
+	if instance_exists(myFloorPlat)
+	&& (myFloorPlat.object_index == obj_semi_solid_wall || object_is_ancestor(myFloorPlat.object_index, obj_semi_solid_wall))
+	{
+		var _yCheck = max(1, myFloorPlat.ySpeed + 1);
+		if !place_meeting(x, _yCheck, obj_wall_collisions)
+		{
+			y += 1;
+			ySpeed = _yCheck - 1;
+			forgetSemiSolid = myFloorPlat;
+			setOnGround(false);
+		}
+		
+	}
 }
+
+
+
 
 //Move
 y += ySpeed;
+
+if forgetSemiSolid && !place_meeting(x, y, forgetSemiSolid) forgetSemiSolid = noone;
+
+// final moving platform logic
+movePlatXspeed = 0;
+if instance_exists(myFloorPlat)
+{
+	movePlatXspeed = myFloorPlat.xSpeed;
+}
+
+if place_meeting(x + movePlatXspeed, y ,obj_wall_collisions)
+{
+	var _subPixel = .5;
+	var _pixelCheck = _subPixel * sign(movePlatXspeed);
+	while !place_meeting(x + _pixelCheck, y, obj_wall_collisions)
+	{
+		x += _pixelCheck
+	}
+	movePlatXspeed = 0;
+}
+x += movePlatXspeed;
+
+if instance_exists(myFloorPlat) 
+&& myFloorPlat.ySpeed != 0
+{
+	if !place_meeting(x, myFloorPlat.bbox_top, obj_wall_collisions)
+	&& myFloorPlat.bbox_top >= bbox_bottom - terminalVelocity
+	{
+		y = myFloorPlat.bbox_top;
+	}
+	
+	if myFloorPlat.ySpeed < 0
+	&& place_meeting(x, y + myFloorPlat.ySpeed, obj_wall_collisions)
+	{
+		if myFloorPlat.object_index == obj_semi_solid_wall
+		|| object_is_ancestor(myFloorPlat.object_index, obj_semi_solid_wall)
+		{
+			var _subPixel = .25
+			while place_meeting(x, y + myFloorPlat.ySpeed, obj_wall_collisions)
+			{
+				y += _subPixel;
+			}
+			while place_meeting(x, y, obj_wall_collisions)
+			{
+				y -= _subPixel;
+			}
+			y = round(y);
+		}
+		setOnGround(false);
+	}
+}
+
 	
 #endregion
 
@@ -317,4 +433,67 @@ if (keyboard_check_pressed(ord("R"))) {
 
 if (keyboard_check_pressed(ord("Q"))) {
 	hp -= 10;
+}
+
+
+if (keyboard_check_pressed(ord("T"))) {
+
+	if isRecording
+	{
+	    if !instance_exists(obj_player_ghost) 
+		{
+        var ghost = instance_create_layer(x, y, "Instances", obj_player_ghost);
+		isRecording = false;
+		current_frame = 0;
+		ds_list_copy(global.last_recorded_actions, global.player_actions)
+		} 
+	} else 
+	{
+		display_text = "Recording...";
+		text_timer = 60; // Display text for 1 seconds (60 steps at 60 FPS)
+		ds_list_clear(global.player_actions)
+		isRecording = true;
+	}
+}
+
+if (keyboard_check_pressed(ord("P"))) {
+    if !instance_exists(obj_player_ghost) {
+		var queue = load_action_queue("recorded_actions.json");
+		global.player_actions = queue;
+        var ghost = instance_create_layer(x, y, "Instances", obj_player_ghost);
+    }
+}
+
+if (keyboard_check_pressed(ord("S")) && keyboard_check(vk_control)) { // Press 'S' to save the queue
+	if ds_list_size(global.last_recorded_actions) > 0
+	{
+	    save_action_queue(global.last_recorded_actions);
+	} else
+	{
+		show_debug_message("No actions to save");
+	}
+}
+
+
+
+
+
+
+
+
+if (isRecording)
+{
+var action = {
+    x: x,
+    y: y,
+    faceDir: faceDir,
+    sprite_index: sprite_index,
+    frame: current_frame
+};
+	ds_list_add(global.player_actions, action);
+	current_frame++;
+}
+
+if (text_timer > 0) {
+    text_timer--;
 }
