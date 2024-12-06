@@ -83,6 +83,27 @@ function load_action_queue(filename) {
     return action_list; 
 }
 
+function convert_array_to_list(array) {
+    var action_list = ds_list_create();
+        var json_data = json_stringify(array);
+        var action_array = json_parse(json_data);
+
+        for (var i = 0; i < array_length(action_array); i++) {
+            var action_data = action_array[i];
+
+            var action = {
+                x: action_data[0],
+                y: action_data[1],
+                faceDir: action_data[2],
+                sprite_index: action_data[3]
+            };
+
+            ds_list_add(action_list, action);
+        }
+
+    return action_list; 
+}
+
 
 
 

@@ -468,7 +468,9 @@ if (is_shield_active)
 {
     var _collision = instance_place(x, y + 1, all);
 
-    if (_collision != noone && _collision.visible) 
+    if (_collision != noone && (_collision.object_index == obj_wall_collisions || object_is_ancestor(_collision.object_index, obj_wall_collisions) || 
+	 _collision.object_index == obj_semi_solid_wall || object_is_ancestor(_collision.object_index, obj_semi_solid_wall))
+	) 
 	{
         ySpeed = -bounce_strength; 
     }

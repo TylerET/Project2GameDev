@@ -1,19 +1,18 @@
 {
   "$GMObject":"",
-  "%Name":"obj_game_controller",
+  "%Name":"obj_persistent_room_transition",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_game_controller",
+  "name":"obj_persistent_room_transition",
   "overriddenProperties":[],
   "parent":{
     "name":"Controllers",
     "path":"folders/Objects/Controllers.yy",
   },
   "parentObjectId":null,
-  "persistent":true,
+  "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
   "physicsFriction":0.2,

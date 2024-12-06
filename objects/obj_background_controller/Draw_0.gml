@@ -8,10 +8,10 @@ draw_sprite(spr_concept_background_bright, 0, 0, 0);
 
 shader_reset();
 
-// Activate the shader
-shader_set(shader_aura);
+//// Activate the shader
+//shader_set(shader_aura);
 
-//// Pass the player's position in room coordinates
+////// Pass the player's position in room coordinates
 //var playerPositionUniform = shader_get_uniform(shader_aura, "playerPosition");
 //shader_set_uniform_f(playerPositionUniform, obj_player.x, obj_player.y);
 
