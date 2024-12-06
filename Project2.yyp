@@ -57,6 +57,7 @@
     {"id":{"name":"DebugMovementRoom","path":"rooms/DebugMovementRoom/DebugMovementRoom.yy",},},
     {"id":{"name":"IntroCutSceneRoom","path":"rooms/IntroCutSceneRoom/IntroCutSceneRoom.yy",},},
     {"id":{"name":"WinScreenRoom","path":"rooms/WinScreenRoom/WinScreenRoom.yy",},},
+    {"id":{"name":"script_ghost_actions","path":"scripts/script_ghost_actions/script_ghost_actions.yy",},},
     {"id":{"name":"script_player_actions","path":"scripts/script_player_actions/script_player_actions.yy",},},
     {"id":{"name":"utility","path":"scripts/utility/utility.yy",},},
     {"id":{"name":"shader_aura","path":"shaders/shader_aura/shader_aura.yy",},},
@@ -98,8 +99,8 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
-    {"roomId":{"name":"DebugMovementRoom","path":"rooms/DebugMovementRoom/DebugMovementRoom.yy",},},
     {"roomId":{"name":"IntroCutSceneRoom","path":"rooms/IntroCutSceneRoom/IntroCutSceneRoom.yy",},},
+    {"roomId":{"name":"DebugMovementRoom","path":"rooms/DebugMovementRoom/DebugMovementRoom.yy",},},
     {"roomId":{"name":"WinScreenRoom","path":"rooms/WinScreenRoom/WinScreenRoom.yy",},},
   ],
   "templateType":"game",

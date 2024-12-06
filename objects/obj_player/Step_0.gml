@@ -369,9 +369,11 @@ if (keyboard_check_pressed(ord("T"))) {
 
 if (keyboard_check_pressed(ord("P"))) {
     if !instance_exists(obj_player_ghost) {
-		var queue = load_action_queue("recorded_actions.json");
+		//var queue = load_action_queue("recorded_actions.json");
+		var queue = script_ghost_actions();
 		global.player_actions = queue;
         var ghost = instance_create_layer(x, y, "Instances", obj_player_ghost);
+		ghost.loop = true;
     }
 }
 

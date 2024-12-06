@@ -1,5 +1,6 @@
 image_alpha = 0.5; // 50% transparency
 index = 0;
+loop = false;
 
 
 if variable_instance_exists(self, "action_queue") {
