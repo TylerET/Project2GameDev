@@ -345,3 +345,66 @@ if (keyboard_check_pressed(ord("R"))) {
 if (keyboard_check_pressed(ord("Q"))) {
 	hp -= 10;
 }
+
+
+if (keyboard_check_pressed(ord("T"))) {
+
+	if isRecording
+	{
+	    if !instance_exists(obj_player_ghost) 
+		{
+        var ghost = instance_create_layer(x, y, "Instances", obj_player_ghost);
+		isRecording = false;
+		current_frame = 0;
+		ds_list_copy(global.last_recorded_actions, global.player_actions)
+		} 
+	} else 
+	{
+		display_text = "Recording...";
+		text_timer = 60; // Display text for 1 seconds (60 steps at 60 FPS)
+		ds_list_clear(global.player_actions)
+		isRecording = true;
+	}
+}
+
+if (keyboard_check_pressed(ord("P"))) {
+    if !instance_exists(obj_player_ghost) {
+		var queue = load_action_queue("recorded_actions.json");
+		global.player_actions = queue;
+        var ghost = instance_create_layer(x, y, "Instances", obj_player_ghost);
+    }
+}
+
+if (keyboard_check_pressed(ord("S")) && keyboard_check(vk_control)) { // Press 'S' to save the queue
+	if ds_list_size(global.last_recorded_actions) > 0
+	{
+	    save_action_queue(global.last_recorded_actions);
+	} else
+	{
+		show_debug_message("No actions to save");
+	}
+}
+
+
+
+
+
+
+
+
+if (isRecording)
+{
+var action = {
+    x: x,
+    y: y,
+    faceDir: faceDir,
+    sprite_index: sprite_index,
+    frame: current_frame
+};
+	ds_list_add(global.player_actions, action);
+	current_frame++;
+}
+
+if (text_timer > 0) {
+    text_timer--;
+}

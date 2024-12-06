@@ -1,7 +1,23 @@
+current_frame = 0;
+isRecording = false;
+global.player_actions = ds_list_create();
+global.last_recorded_actions = ds_list_create();
+
+// Above player head texts
+text_timer = 0;
+display_text = ""; 
+
+
+
+
+
+
+
+
 #region Sprites
-idleSpr = spr_player_idle_knife;
+idleSpr = spr_player_idle;
 walkSpr = spr_player_walk;
-runSpr = spr_player_run_knife
+runSpr = spr_player_run;
 jumpSpr = spr_player_jump;
 jumpFlipSpr = spr_player_jump_flip;
 wallSlideSpr[0] = spr_player_wall_slide;
