@@ -2,7 +2,7 @@ if (global.paused) {
 	image_speed = 0;
     exit; // Skip the rest of the Step Event if the game is paused
 } else {
-	image_speed = 1 
+	image_speed = 1;
 }
 
 #region unlockable controls 
@@ -47,8 +47,6 @@ if (is_dashing) {
 
 #region Emerald Guard
 // Define colors
-var color_white = make_color_rgb(255, 255, 255);
-var color_green = make_color_rgb(0, 255, 0);
 
 if (shield_cooldown > 0) 
 {
@@ -96,6 +94,41 @@ if (is_shield_active)
     if (_collision != noone && _collision.visible) 
 	{
         ySpeed = -bounce_strength; 
+    }
+}
+#endregion
+
+#region Slomo
+if (slomo_active) {
+    slomo_timer++;
+
+    var remaining_time_ratio = (slomo_duration - slomo_timer) / slomo_duration;
+
+    var fade_color = color_lerp(color_white, color_blue, remaining_time_ratio);
+    image_blend = fade_color;
+
+    if (slomo_timer >= slomo_duration) {
+        // End slow motion
+        slomo_active = false;
+        slomo_timer = 0;
+        slomo_cooldown = slomo_cooldown_duration;
+        game_set_speed(default_room_speed, default_gamespeed_fps);
+
+        // Reset color to white at the end
+        image_blend = color_white; 
+    }
+}
+
+if (slomo_cooldown > 0) {
+    slomo_cooldown -= 1;
+}
+
+// Check for T press
+if (keyboard_check_pressed(ord("T"))) {
+    if (!slomo_active && slomo_cooldown <= 0) {
+        slomo_active = true;
+        slomo_timer = 0;
+        game_set_speed(default_room_speed * slomo_speed_factor, default_gamespeed_fps);
     }
 }
 #endregion

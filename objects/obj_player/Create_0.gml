@@ -70,9 +70,11 @@ dash_y = 0
 dash_duration = 0.3 //in seconds
 dash_cd = 1 //in seconds
 
-var color_white = make_color_rgb(255, 255, 255);
-var color_green = make_color_rgb(0, 255, 0);
+color_white = make_color_rgb(255, 255, 255);
+color_green = make_color_rgb(0, 255, 0);
+color_blue = make_color_rgb(0, 0, 255);
 
+//Emerald Guard
 has_green_ability = true; // Tracks green cooldown
 is_shield_active = false;  // Track if the shield is active
 bounce_strength = 10;       // Strength of the bounce
@@ -81,3 +83,17 @@ shield_timer = 0;          // Shield duration
 shield_cooldown = 0;       // Cooldown duration
 shield_recharge_time = 300; // 5 seconds
 shield_active_time = 180;   // 3 seconds
+
+//Time Slow
+default_room_speed = room_speed;
+default_gamespeed_fps = gamespeed_fps;
+
+// Slomo variables
+slomo_active = false;
+slomo_timer = 0;
+slomo_duration = 3 * room_speed;   // 3 seconds
+slomo_cooldown = 0;
+slomo_cooldown_duration = 5 * room_speed; // 5 second cooldown
+
+slomo_speed_factor = 0.75; 
+
