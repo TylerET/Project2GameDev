@@ -113,8 +113,8 @@
   "RoomOrderNodes":[
     {"roomId":{"name":"PersistentControllerRoom","path":"rooms/PersistentControllerRoom/PersistentControllerRoom.yy",},},
     {"roomId":{"name":"IntroCutSceneRoom","path":"rooms/IntroCutSceneRoom/IntroCutSceneRoom.yy",},},
-    {"roomId":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
     {"roomId":{"name":"DebugMovementRoom","path":"rooms/DebugMovementRoom/DebugMovementRoom.yy",},},
+    {"roomId":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
     {"roomId":{"name":"WinScreenRoom","path":"rooms/WinScreenRoom/WinScreenRoom.yy",},},
   ],
   "templateType":"game",
