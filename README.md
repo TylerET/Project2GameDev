@@ -23,8 +23,8 @@
 - `Alt` to dash
 - `ESC` to pause the game
 - `R` to restart the room
-- `CTRL` + `R` to toggle recording
-- `CTRL` + `S` to save recording to JSON in user/appdata/local/Project2
+- `CTRL` + `R` to start recording player actions.  Press again to stop recording, the actions will then play.
+- `CTRL` + `S` to save most recent recording to JSON in user/appdata/local/Project2
 - `Q` to activate Emerald Guard
 - `T` to Slow Time
 - `Right Mouse Button` to open radial menu (Partially Implemented)
