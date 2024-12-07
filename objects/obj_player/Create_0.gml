@@ -8,12 +8,6 @@ text_timer = 0;
 display_text = ""; 
 
 
-
-
-
-
-
-
 #region Sprites
 idleSpr = spr_player_idle;
 walkSpr = spr_player_walk;
@@ -25,8 +19,13 @@ wallSlideSpr[1] = spr_player_wall_slide_left;
 dashSpr = spr_player_dash
 
 #endregion
-
 hp = 100;
+
+hit_cooldown = 0;
+hit_count = 0;
+dead = false;
+death_timer = 0;
+death_timer_started = false;
 
 #region Movement
 controlsSetup();
