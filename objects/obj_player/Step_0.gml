@@ -477,8 +477,6 @@ if (is_shield_active)
 } 
 else
 {
-    image_blend = color_white; // Reset to normal
-
     if (!keyboard_check(ord("Q"))) {
         shield_timer = 0;
     }
