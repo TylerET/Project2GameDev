@@ -1,6 +1,6 @@
 // Variables
 var player = instance_nearest(x, y, obj_player);
-var move_speed = 2;
+var move_speed = 4;
 var attack_range = 50;         // Range for slashing
 var attack_cooldown = 60;      // Cooldown between slashes
 var disappear_distance = 300;
@@ -120,5 +120,6 @@ if (player == noone) {
 if (death_timer <= 0 && state != "death") {
     state = "death";
 	audio_play_sound(bossdeath, 10, false)
+	room_goto_next()
     image_index = 0;
 }

@@ -1,6 +1,12 @@
 if (global.paused) {
 	image_speed = 0;
+	if (keyboard_check_pressed(ord("R"))) {
+        room_restart();
+		global.paused = false
+    }
+	
     exit; // Skip the rest of the Step Event if the game is paused
+	
 } else {
 	image_speed = 1;
 }
@@ -606,4 +612,19 @@ if (player_died && !isRewinding) {
     isRewinding = true;
     rewind_index = (buffer_index - 1 + buffer_size) mod buffer_size; // Start at the most recent frame
     player_died = false; // Reset death flag to prevent retriggering
+}
+
+if (dead == true) {
+    if (image_index >= image_number - 1 && !death_timer_started) {
+        death_timer = room_speed * 5;
+        death_timer_started = true;
+        sprite_index = spr_player_death;
+        global.paused = true;
+    }
+
+    if (death_timer_started) {
+        death_timer--;
+        if (death_timer <= 0) {
+        }
+    }
 }
