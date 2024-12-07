@@ -625,6 +625,7 @@ if (dead == true) {
     if (death_timer_started) {
         death_timer--;
         if (death_timer <= 0) {
+			game_restart()
         }
     }
 }
