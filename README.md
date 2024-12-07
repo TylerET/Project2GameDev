@@ -27,6 +27,7 @@
 - `CTRL` + `S` to save recording to JSON in user/appdata/local/Project2
 - `Q` to activate Emerald Guard
 - `T` to Slow Time
+- `Right Mouse Button` to open radial menu (Partially Implemented)
 
 ## Cheat Codes
 
