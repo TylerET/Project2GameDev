@@ -1,6 +1,9 @@
 current_frame = 0;
+recording_frame = 0;
+isRewinding = false;
+rewind_index = -1;
 isRecording = false;
-buffer_size = 180;
+buffer_size = 90;
 event_buffer = array_create(buffer_size, undefined);
 buffer_index = 0;
 global.player_actions = ds_list_create();
