@@ -31,7 +31,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.6.2.162",
+    "IDEVersion":"2024.8.1.171",
   },
   "name":"Project2",
   "resources":[
@@ -71,6 +71,12 @@
     {"id":{"name":"shader_background_slow_fade","path":"shaders/shader_background_slow_fade/shader_background_slow_fade.yy",},},
     {"id":{"name":"shader_color_select_grayscale","path":"shaders/shader_color_select_grayscale/shader_color_select_grayscale.yy",},},
     {"id":{"name":"shader_grayscale","path":"shaders/shader_grayscale/shader_grayscale.yy",},},
+    {"id":{"name":"emeraldguardactive","path":"sounds/emeraldguardactive/emeraldguardactive.yy",},},
+    {"id":{"name":"footstep","path":"sounds/footstep/footstep.yy",},},
+    {"id":{"name":"icecracking","path":"sounds/icecracking/icecracking.yy",},},
+    {"id":{"name":"slide","path":"sounds/slide/slide.yy",},},
+    {"id":{"name":"updraft","path":"sounds/updraft/updraft.yy",},},
+    {"id":{"name":"whoosh","path":"sounds/whoosh/whoosh.yy",},},
     {"id":{"name":"background","path":"sprites/background/background.yy",},},
     {"id":{"name":"spr_a","path":"sprites/spr_a/spr_a.yy",},},
     {"id":{"name":"spr_camera_transition","path":"sprites/spr_camera_transition/spr_camera_transition.yy",},},

@@ -55,6 +55,8 @@ coyoteJumpTimer = 0;
 // Wall slide
 onWall = false;
 
+footstep_played = false;
+
 function checkForSemiSolidPlatform(_x, _y)
 {
 	var _return = noone;

@@ -10,6 +10,10 @@ if (global.paused) {
 
 if (keyboard_check_pressed(vk_alt) and can_dash) { //add conditions to have abilities! *** (must have red color for dash)
 	// add dash sfx!
+	var random_pitch = random_range(0.55, 1.55);
+    audio_sound_pitch(whoosh, random_pitch);
+    audio_play_sound(whoosh, 10, false);
+	
 	is_dashing = true
 	can_dash = false
 	alarm[0] = dash_duration * 30
@@ -51,6 +55,7 @@ if (slomo_active) {
 
     var remaining_time_ratio = (slomo_duration - slomo_timer) / slomo_duration;
 
+    // Lerp from white to blue
     var fade_color = color_lerp(color_white, color_blue, remaining_time_ratio);
     image_blend = fade_color;
 
@@ -61,7 +66,6 @@ if (slomo_active) {
         slomo_cooldown = slomo_cooldown_duration;
         game_set_speed(default_room_speed, default_gamespeed_fps);
 
-        // Reset color to white at the end
         image_blend = color_white; 
     }
 }
@@ -74,11 +78,17 @@ if (slomo_cooldown > 0) {
 if (keyboard_check_pressed(ord("T"))) {
     if (!slomo_active && slomo_cooldown <= 0) {
         slomo_active = true;
+		
+		var random_pitch = random_range(0.55, 1.55);
+		audio_sound_pitch(icecracking,random_pitch);
+		audio_play_sound(icecracking, 10, false)
+		
         slomo_timer = 0;
         game_set_speed(default_room_speed * slomo_speed_factor, default_gamespeed_fps);
     }
 }
 #endregion
+
 
 
 if (x < 0 || x > room_width) || (y < 0 | y > room_height) {
@@ -175,6 +185,10 @@ if !downKey && jumpKeyBuffered && jumpCount < jumpMax {
 	jumpKeyBufferTimer = 0;
 	if (jumpCount != 0) {
 		sprite_index = spr_player_jump_flip;
+		
+		var random_pitch = random_range(1.95, 2.35);
+        audio_sound_pitch(updraft, random_pitch);
+        audio_play_sound(updraft, 10, false);
 	}
 	jumpCount++;
 	jumpHoldTimer = jumpHoldFrames;
@@ -341,8 +355,14 @@ if xSpeed == 0 {sprite_index = idleSpr}
 if !onGround {
 	if (onWall && ySpeed >= 0){
 		sprite_index = wallSlideSpr[moveDir == 1 ? 0 : 1]
+		var random_pitch = random_range(0.95, 1.05);
+        audio_sound_pitch(slide, random_pitch);
+		audio_sound_gain(slide, 0.7, 1)
+        audio_play_sound(slide, 10, true);
 		image_speed = 0;
 	} else {
+		audio_stop_sound(slide)
+		
 		sprite_index = jumpSpr
 		//make falling sprite less wobbly
 		image_speed = 0
@@ -433,6 +453,9 @@ if (has_green_ability && shield_cooldown <= 0)
     if (keyboard_check(ord("Q")) && !is_shield_active) 
 	{
         is_shield_active = true; // Activate shield
+		var random_pitch = random_range(0.55, 1.55);
+		audio_sound_pitch(emeraldguardactive, random_pitch);
+		audio_play_sound(emeraldguardactive, 10, false);
     }
 }
 
@@ -476,10 +499,36 @@ if (is_shield_active)
 #endregion
 
 
+#region Frame-Based Sounds
+if (sprite_index == spr_player_run) {
+    var current_frame = floor(image_index);
 
+    if (current_frame == 1 || current_frame == 5) {
+        if (!footstep_played) {
+            var random_pitch = random_range(0.95, 1.05);
+            audio_sound_pitch(footstep, random_pitch);
+            audio_play_sound(footstep, 10, false);
+            footstep_played = true;
+        }
+    } else {
+        footstep_played = false;
+    }
+}
+else if (sprite_index == spr_player_walk) {
+    var current_frame = floor(image_index);
 
-
-
+    if (current_frame == 0 || current_frame == 4) {
+        if (!footstep_played) {
+            var random_pitch = random_range(0.55, 1.55);
+            audio_sound_pitch(footstep, random_pitch);
+            audio_play_sound(footstep, 10, false);
+            footstep_played = true;
+        }
+    } else {
+        footstep_played = false;
+    }
+}
+#endregion
 
 
 if (isRecording)
