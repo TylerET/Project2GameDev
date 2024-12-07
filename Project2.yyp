@@ -32,7 +32,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.8.1.171",
+    "IDEVersion":"2024.6.2.162",
   },
   "name":"Project2",
   "resources":[
@@ -54,6 +54,7 @@
     {"id":{"name":"obj_semi_solid_platform_visible","path":"objects/obj_semi_solid_platform_visible/obj_semi_solid_platform_visible.yy",},},
     {"id":{"name":"obj_semi_solid_platform","path":"objects/obj_semi_solid_platform/obj_semi_solid_platform.yy",},},
     {"id":{"name":"obj_semi_solid_wall","path":"objects/obj_semi_solid_wall/obj_semi_solid_wall.yy",},},
+    {"id":{"name":"obj_victory","path":"objects/obj_victory/obj_victory.yy",},},
     {"id":{"name":"obj_wall_collisions_next_room","path":"objects/obj_wall_collisions_next_room/obj_wall_collisions_next_room.yy",},},
     {"id":{"name":"obj_wall_collisions_visible","path":"objects/obj_wall_collisions_visible/obj_wall_collisions_visible.yy",},},
     {"id":{"name":"obj_wall_collisions","path":"objects/obj_wall_collisions/obj_wall_collisions.yy",},},
@@ -132,6 +133,7 @@
     {"id":{"name":"spr_semi_solid_wall","path":"sprites/spr_semi_solid_wall/spr_semi_solid_wall.yy",},},
     {"id":{"name":"spr_shift","path":"sprites/spr_shift/spr_shift.yy",},},
     {"id":{"name":"spr_spacebar","path":"sprites/spr_spacebar/spr_spacebar.yy",},},
+    {"id":{"name":"spr_victory","path":"sprites/spr_victory/spr_victory.yy",},},
     {"id":{"name":"spr_wall_collisions_next_room","path":"sprites/spr_wall_collisions_next_room/spr_wall_collisions_next_room.yy",},},
     {"id":{"name":"spr_wall_collisions","path":"sprites/spr_wall_collisions/spr_wall_collisions.yy",},},
     {"id":{"name":"spr_wall_slope_1","path":"sprites/spr_wall_slope_1/spr_wall_slope_1.yy",},},
