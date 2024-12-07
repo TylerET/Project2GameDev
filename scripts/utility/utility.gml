@@ -5,6 +5,10 @@ function msg(title, variable){
 }
 
 function apply_pause_overlay_effect() {
+	if (!layer_exists("pause_overlay")) {
+    layer_create(-1000, "pause_overlay"); // Adjust depth as needed
+    show_debug_message("Created 'pause_overlay' layer.");
+}
     var effect = fx_create("_filter_old_film");
     
     // Check if the effect struct was created successfully
@@ -22,6 +26,7 @@ function apply_pause_overlay_effect() {
         fx_set_parameter(effect, "g_OldFilmRingIntensity", 0);
 		
         layer_set_fx("pause_overlay", effect);
+		layer_set_visible("pause_overlay", false);
     } else {
         show_debug_message("Failed to create Old Film FX struct.");
     }

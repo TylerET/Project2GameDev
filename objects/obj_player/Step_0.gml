@@ -19,10 +19,34 @@ if (dead == true) {
     }
 }
 
+if (isRewinding) {
+    if (rewind_index == 0) {
+        isRewinding = false;
+		player_died = false;
+		rewind_index = -1;
+		buffer_index = 0;
+		event_buffer = array_create(buffer_size, undefined);
+		layer_set_visible("pause_overlay", false);
+        show_debug_message("Rewind complete.");
+    } else {
+        var action = event_buffer[rewind_index];
+		
+
+        if (action != undefined) {
+            x = action.x;
+            y = action.y;
+            sprite_index = action.sprite_index;
+            image_xscale = action.faceDir;
+        }
+
+        rewind_index = (rewind_index - 1 + buffer_size) mod buffer_size;
+    }
+}
+
 #region unlockable controls 
 // at the top because dash ignores gravity and animations-- dashing into diagonal corners is broken right now, fix!!!
 
-if (keyboard_check_pressed(vk_alt) and can_dash) { //add conditions to have abilities! *** (must have red color for dash)
+if (keyboard_check_pressed(vk_alt) and can_dash and !isRewinding) { //add conditions to have abilities! *** (must have red color for dash)
 	// add dash sfx!
 	var random_pitch = random_range(0.55, 1.55);
     audio_sound_pitch(whoosh, random_pitch);
@@ -89,7 +113,7 @@ if (slomo_cooldown > 0) {
 }
 
 // Check for T press
-if (keyboard_check_pressed(ord("T"))) {
+if (keyboard_check_pressed(ord("T")) and !isRewinding) {
     if (!slomo_active && slomo_cooldown <= 0) {
         slomo_active = true;
 		
@@ -286,7 +310,7 @@ if instance_exists(myFloorPlat)
 
 
 // Manually fall through semi solid;
-if downKey && jumpKeyPressed
+if downKey && jumpKeyPressed and !isRewinding
 {
 	if instance_exists(myFloorPlat)
 	&& (myFloorPlat.object_index == obj_semi_solid_wall || object_is_ancestor(myFloorPlat.object_index, obj_semi_solid_wall))
@@ -364,6 +388,8 @@ if instance_exists(myFloorPlat)
 #endregion
 
 #region Sprite controls
+if (!isRewinding)
+{
 if abs(xSpeed) > 0 { sprite_index = runType ? runSpr : walkSpr}
 if xSpeed == 0 {sprite_index = idleSpr}
 if !onGround {
@@ -390,42 +416,44 @@ if !onGround {
 	}	
 }
 mask_index = idleSpr
+}
+
 
 
 #endregion
 
-if (keyboard_check_pressed(vk_f1)) {
+if (keyboard_check_pressed(vk_f1) and !isRewinding ) {
     shaderActive1 = !shaderActive1;
 	shaderActive2  = false;
 }
 
-if (keyboard_check_pressed(vk_f2)) {
+if (keyboard_check_pressed(vk_f2) and !isRewinding ) {
     shaderActive2 = !shaderActive2;
 	shaderActive1 = false;
 }
 
-if (keyboard_check_pressed(vk_f3)) {
+if (keyboard_check_pressed(vk_f3) and !isRewinding ) {
 	msg("Tolerance", tolerance)
     tolerance += .1;
 }
 
-if (keyboard_check_pressed(vk_f4)) {
+if (keyboard_check_pressed(vk_f4) and !isRewinding ) {
     shaderActive3 = !shaderActive3;
 	shaderActive1 = false;
 	shaderActive2 = false;
 }
 
-if (keyboard_check_pressed(ord("R"))  && !keyboard_check(vk_control)) {
-	game_restart()
+if (keyboard_check_pressed(ord("R"))  && !keyboard_check(vk_control) ) {
+	room_restart()
 }
 
-if (keyboard_check_pressed(ord("R"))  && keyboard_check(vk_control)) {
+if (keyboard_check_pressed(ord("R"))  && keyboard_check(vk_control) and !isRewinding ) {
 
 	if isRecording
 	{
         var ghost = instance_create_layer(x, y, "Instances", obj_player_ghost);
 		isRecording = false;
-		current_frame = 0;
+		recording_frame = 0;
 		ds_list_copy(global.last_recorded_actions, global.player_actions)
 	} else 
 	{
@@ -436,7 +464,7 @@ if (keyboard_check_pressed(ord("R"))  && keyboard_check(vk_control)) {
 	}
 }
 
-if (keyboard_check_pressed(ord("P"))) {
+if (keyboard_check_pressed(ord("P")) and !isRewinding) {
     if !instance_exists(obj_player_ghost) {
 		var queue = load_action_queue("recorded_actions.json");
 		global.player_actions = queue;
@@ -444,7 +472,7 @@ if (keyboard_check_pressed(ord("P"))) {
     }
 }
 
-if (keyboard_check_pressed(ord("S")) && keyboard_check(vk_control)) { // Press 'S' to save the queue
+if (keyboard_check_pressed(ord("S")) && keyboard_check(vk_control) and !isRewinding) { // Press 'S' to save the queue
 	if ds_list_size(global.last_recorded_actions) > 0
 	{
 	    save_action_queue(global.last_recorded_actions);
@@ -469,7 +497,7 @@ if (shield_cooldown > 0)
 
 if (has_green_ability && shield_cooldown <= 0)
 {
-    if (keyboard_check(ord("Q")) && !is_shield_active) 
+    if (keyboard_check(ord("Q")) && !is_shield_active and !isRewinding) 
 	{
         is_shield_active = true; // Activate shield
 		var random_pitch = random_range(0.55, 1.55);
@@ -497,7 +525,7 @@ if (is_shield_active)
 else
 {
 
-    if (!keyboard_check(ord("Q"))) {
+    if (!keyboard_check(ord("Q")) and !isRewinding) {
         shield_timer = 0;
     }
 }
@@ -548,20 +576,34 @@ else if (sprite_index == spr_player_walk) {
 }
 #endregion
 
-
-if (isRecording)
-{
 var action = {
     x: x,
     y: y,
     faceDir: faceDir,
     sprite_index: sprite_index,
-    frame: current_frame
+    frame: recording_frame
 };
+
+if (!player_died)
+{
+event_buffer[buffer_index] = action;
+buffer_index = (buffer_index + 1) mod buffer_size;
+
+}
+
+if (isRecording)
+{
 	ds_list_add(global.player_actions, action);
-	current_frame++;
+	recording_frame++;	
 }
 
 if (text_timer > 0) {
     text_timer--;
+}
+
+if (player_died && !isRewinding) {
+	layer_set_visible("pause_overlay", true);
+    isRewinding = true;
+    rewind_index = (buffer_index - 1 + buffer_size) mod buffer_size; // Start at the most recent frame
+    player_died = false; // Reset death flag to prevent retriggering
 }
