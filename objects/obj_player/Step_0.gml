@@ -5,8 +5,19 @@ if (global.paused) {
 	image_speed = 1;
 }
 
+if (dead == true) {
+    if (image_index >= image_number - 1 && !death_timer_started) {
+        death_timer = room_speed * 5;
+        death_timer_started = true;
+    }
 
-
+    if (death_timer_started) {
+        death_timer--;
+        if (death_timer <= 0) {
+            instance_destroy();
+        }
+    }
+}
 
 if (isRewinding) {
     if (rewind_index == 0) {
@@ -31,8 +42,6 @@ if (isRewinding) {
         rewind_index = (rewind_index - 1 + buffer_size) mod buffer_size;
     }
 }
-
-
 
 #region unlockable controls 
 // at the top because dash ignores gravity and animations-- dashing into diagonal corners is broken right now, fix!!!
@@ -476,6 +485,11 @@ if (keyboard_check_pressed(ord("S")) && keyboard_check(vk_control) and !isRewind
 #region Emerald Guard
 // Define colors
 
+if (hit_cooldown > 0)
+{
+    hit_cooldown--;
+}
+
 if (shield_cooldown > 0) 
 {
     shield_cooldown--;
@@ -510,7 +524,6 @@ if (is_shield_active)
 } 
 else
 {
-    image_blend = color_white; // Reset to normal
 
     if (!keyboard_check(ord("Q")) and !isRewinding) {
         shield_timer = 0;
