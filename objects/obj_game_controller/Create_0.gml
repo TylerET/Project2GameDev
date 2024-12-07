@@ -8,3 +8,6 @@ audio_sound_gain(forestbackground, 0.02, 0);
 
 audio_play_sound(pianobackground, true, 1);
 audio_sound_gain(forestbackground, 0.08, 0);
+
+window_set_fullscreen(true);
+
