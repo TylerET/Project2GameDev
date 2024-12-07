@@ -5,6 +5,34 @@ if (global.paused) {
 	image_speed = 1;
 }
 
+if (player_died) {
+    // Start rewinding from the most recent index
+    var rewind_index = (buffer_index - 1 + buffer_size) mod buffer_size;
+
+    // Loop through the buffer in reverse
+    for (var i = 0; i < buffer_size; i++) {
+        var action = event_buffer[rewind_index];
+			show_debug_message(event_buffer[rewind_index])
+
+
+        // Apply the recorded action to the player
+        if (action != undefined) {
+            x = action.x;
+            y = action.y;
+            sprite_index = action.sprite_index;
+            image_xscale = action.faceDir;
+        }
+
+        // Move backward through the buffer
+        rewind_index = (rewind_index - 1 + buffer_size) mod buffer_size;
+
+        // Delay if needed (e.g., simulate rewinding frame by frame)
+        // Use alarms or timers to slow down the rewind for effect
+    }
+	exit
+}
+
+
 #region unlockable controls 
 // at the top because dash ignores gravity and animations-- dashing into diagonal corners is broken right now, fix!!!
 
@@ -541,7 +569,10 @@ var action = {
     frame: current_frame
 };
 	ds_list_add(global.player_actions, action);
+	event_buffer[buffer_index] = action;
+	buffer_index = (buffer_index + 1) mod buffer_size;
 	current_frame++;
+	
 }
 
 if (text_timer > 0) {

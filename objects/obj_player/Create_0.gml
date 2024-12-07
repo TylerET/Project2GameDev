@@ -1,7 +1,11 @@
 current_frame = 0;
 isRecording = false;
+buffer_size = 180;
+event_buffer = array_create(buffer_size, undefined);
+buffer_index = 0;
 global.player_actions = ds_list_create();
 global.last_recorded_actions = ds_list_create();
+player_died = false;
 
 // Above player head texts
 text_timer = 0;
